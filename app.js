@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 8000;
 app.use(express.static('public'));
 
 
-const params =  {
+const body =  {
   client_id: '0739aaaba65d4433b97a9885a9ce26f0',
   client_secret: 'f16edd41072b47d782fde2a1dc2b58da'
 }
@@ -21,7 +21,20 @@ app.get('/', (request, res) => {
 // create route to get single artist by its id
 app.get('/artists/:id', (request, response) => {
   // make api call using fetch
-  fetch(`https://api.spotify.com/v1/artists/${request.params.id}&format=json&jscmd=data`)
+  fetch(`https://api.spotify.com/v1/artists/${request.params.id}&format=json&jscmd=data`, { body })
+  .then((response) => {
+      return response.text();
+  }).then((body) => {
+      let results = JSON.parse(body);
+      console.log(results);   // logs to server
+      response.send(results); // sends to frontend
+    });
+});
+
+// create route to get related artists
+app.get('/artists/:id/related-artists', (request, response) => {
+  // make api call using fetch
+  fetch(`https://api.spotify.com/v1/artists/${request.params.id}/related-artists&format=json&jscmd=data`, { body })
   .then((response) => {
       return response.text();
   }).then((body) => {
@@ -33,7 +46,7 @@ app.get('/artists/:id', (request, response) => {
 
 // create a search route
 app.get('/search', (request, response) => {
-  fetch(`https://api.spotify.com/v1/search?q=${request.query.string}&type=artist`)
+  fetch(`https://api.spotify.com/v1/search?q=${request.query.string}&type=artist`, { body })
   .then((response) => {
       return response.text();
   }).then((body) => {
