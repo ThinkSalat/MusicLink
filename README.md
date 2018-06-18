@@ -6,7 +6,7 @@ A D3 data visualization project in JavaScript
 
 **MusicLink** is a music exploration app. After searching for an artist, the user is presented with a web showing the artist they searched for connected to 10-20 related artists, represented by connected nodes. When the user clicks on an artist's node, they can view the artist's bio and a playlist of their top ten songs in the bottom left side of the screen.
 
-Technologies implemented: 
+## Technologies implemented:
 
 **Axios** for ajax calls
 
