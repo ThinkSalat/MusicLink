@@ -955,6 +955,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const url = `https://api.spotify.com/v1/search?q=${encodeURIComponent(searchQuery)}&type=artist`;
     getAuthToken(url)
       .then( res => {
+        // perform action on Spotify API response
         console.log(res.data.artists.items);
       })
       .catch( err => console.log('search query error'));
@@ -967,6 +968,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const url = `https://api.spotify.com/v1/artists/${encodeURIComponent(artistId)}`;
     getAuthToken(url)
       .then( res => {
+        // perform action on Spotify API response
         console.log(res.data);
       })
       .catch( err => console.log('retrieveArtist error'));
@@ -980,6 +982,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const url = `https://api.spotify.com/v1/artists/${encodeURIComponent(artistId)}/related-artists`;
     getAuthToken(url)
       .then( res => {
+        // perform action on Spotify API response
         console.log(res.data.artists);
       })
       .catch( err => console.log('retrieveArtist error'));
@@ -987,34 +990,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.retrieveRelatedArtists = retrieveRelatedArtists;
 
+  //Retrieve Artist Bio page by ID
+  const retrieveArtistBio = artistId => {
+    const url = `https://open.spotify.com/artist/${artistId}/about`;
+    getAuthToken(url)
+      .then( res => {
+        // perform action on Spotify API response
+        console.log(res.data.artists);
+      })
+      .catch( err => console.log('retrieveArtist error'));
+  };
 
-    // axios.get(`/search?string=${query}`)
-    // .then((response) => {
-    //     console.log(response); 
-    // })
-    // .catch(function (error) {
-    //     console.log(error);
-    // });
+  window.retrieveArtistBio = retrieveArtistBio;
 
-    // //Spotify Artist Info
-    // let id = "6C403AR4y6PjN0xNNGh42m";
-    // axios.get(`/artists/${id}`)
-    // .then((response) => {
-    //     console.log(response);
-    // })
-    // .catch(function (error) {
-    //     console.log(error);
-    // });
-
-    // //Spotify Related Artists
-    // // let aId = "6C403AR4y6PjN0xNNGh42m";
-    // axios.get(`/artists/${id}/related-artists`)
-    // .then((response) => {
-    //     console.log(response);
-    // })
-    // .catch(function (error) {
-    //     console.log(error);
-    // });
+  
 
     // axios.get(`/artists/${id}/about`)
     //   .then((response)=> {
