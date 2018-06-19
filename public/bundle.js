@@ -970,7 +970,9 @@ Object(__WEBPACK_IMPORTED_MODULE_0__util_util__["b" /* retrieveArtistBio */])('6
     const regEx = /<div class="bio-primary">(.+?)<\/div><\/div><button class="link expand-toggle">Read More<\/button><\/div></;
     let info = res.data.match(regEx)['1'];
     info = info.replace(/href="/g,'target="_blank" href="https://open.spotify.com');
-    console.log(info);
+    // console.log(info);
+    const artistBio = document.getElementById('artist-bio')
+    artistBio.innerHTML = info;
   })
   .catch( err => console.log('retrieveArtistBio error', err));
 });
