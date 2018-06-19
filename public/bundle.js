@@ -943,6 +943,9 @@ module.exports = Cancel;
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_util__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
+
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -954,7 +957,9 @@ document.addEventListener('DOMContentLoaded', () => {
     Object(__WEBPACK_IMPORTED_MODULE_0__util_util__["d" /* search */])(searchBar.value)
       .then( res => {
         const artistNameArray = res.data.artists.items.map( artist => artist.name);
+        const artistIdArray = res.data.artists.items.map( artist => artist.id);
         console.log(searchBar.value, artistNameArray);
+        console.log(searchBar.value, artistIdArray);
       })
       .catch( err => console.log('err', err));
   });
@@ -964,7 +969,8 @@ window.retrieveArtist = __WEBPACK_IMPORTED_MODULE_0__util_util__["a" /* retrieve
 window.retrieveRelatedArtists = __WEBPACK_IMPORTED_MODULE_0__util_util__["c" /* retrieveRelatedArtists */];
 window.retrieveArtistBio = __WEBPACK_IMPORTED_MODULE_0__util_util__["b" /* retrieveArtistBio */];
 
-  
+  __WEBPACK_IMPORTED_MODULE_1_axios___default.a.get('https://cors-escape.herokuapp.com/http%3A//open.spotify.com/artist/13ubrt8QOOCPljQ2FL1Kca/about&callback=?')
+    .then( succ => console.log(succ), err => console.log(err));
 
 });
 
@@ -1883,11 +1889,6 @@ const search = searchQuery => {
 const retrieveArtist = artistId => {
   const url = `https://api.spotify.com/v1/artists/${encodeURIComponent(artistId)}`;
   return callSpotifyAPI(url)
-    .then( res => {
-      // perform action on Spotify API response
-      console.log(res.data);
-    })
-    .catch( err => console.log('retrieveArtist error'));
 };
 /* harmony export (immutable) */ __webpack_exports__["a"] = retrieveArtist;
 
@@ -1897,11 +1898,6 @@ const retrieveArtist = artistId => {
 const retrieveRelatedArtists = artistId => {
   const url = `https://api.spotify.com/v1/artists/${encodeURIComponent(artistId)}/related-artists`;
   return callSpotifyAPI(url)
-    .then( res => {
-      // perform action on Spotify API response
-      console.log(res.data.artists);
-    })
-    .catch( err => console.log('retrieveRelatedArtists error'));
 };
 /* harmony export (immutable) */ __webpack_exports__["c"] = retrieveRelatedArtists;
 

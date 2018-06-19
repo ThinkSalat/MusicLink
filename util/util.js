@@ -14,11 +14,6 @@ export const search = searchQuery => {
 export const retrieveArtist = artistId => {
   const url = `https://api.spotify.com/v1/artists/${encodeURIComponent(artistId)}`;
   return callSpotifyAPI(url)
-    .then( res => {
-      // perform action on Spotify API response
-      console.log(res.data);
-    })
-    .catch( err => console.log('retrieveArtist error'));
 };
 
 
@@ -26,11 +21,6 @@ export const retrieveArtist = artistId => {
 export const retrieveRelatedArtists = artistId => {
   const url = `https://api.spotify.com/v1/artists/${encodeURIComponent(artistId)}/related-artists`;
   return callSpotifyAPI(url)
-    .then( res => {
-      // perform action on Spotify API response
-      console.log(res.data.artists);
-    })
-    .catch( err => console.log('retrieveRelatedArtists error'));
 };
 
 //Retrieve Artist Bio page by ID
