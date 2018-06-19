@@ -37,11 +37,13 @@ const authApiOptions = {
 // 2. Retrieve Auth Token from Spotify
 // And
 // 3. Perform selected AJAX query
-   
 app.get('/authtoken', (req, res) => {
-  console.log(req.query.url)
   axios(authApiOptions)
-  .then( success => res.send(success.data.access_token))
+  .then( response => {
+    const params = { headers: { 'Authorization': 'Bearer ' + response.data.access_token }, json: true };
+    axios.get(req.query.url, params ).then( apiRes => res.send(apiRes.data))
+      .catch( err => console.log('spotify api call err'));
+  })
   .catch( err => console.log('api error'));
 });
 

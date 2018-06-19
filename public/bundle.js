@@ -949,33 +949,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 document.addEventListener('DOMContentLoaded', () => {
 
   const getAuthToken = url => __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/authtoken', {params: {url}});
-    //Spotify Search
-    // let query = "Shabazz Palaces";
-    // let query = "Shabazz";
-    // axios.get('/authtoken')
-    // .then( res => {
-    //   const token = res.data;
-    //   const params = { headers: { 'Authorization': 'Bearer ' + token }, json: true };
-    //   axios.get(`https://api.spotify.com/v1/search?q=${query}&type=artist`, params )
-    //     .then( succ => console.log(succ.data.artists.items.map(obj => obj.name)))
-    //     .catch( err => console.log(err));
-    // })
-    // .catch( err => console.log(err));
+  
+  const search = searchQuery => {
+    const url = `https://api.spotify.com/v1/search?q=${encodeURIComponent(searchQuery)}&type=artist`;
+    getAuthToken(url)
+      .then( res => {
+        console.log(res.data.artists.items);
+      })
+      .catch( err => console.log('search query error'));
+  };
 
-const searchSpotify = searchQuery => {
-  const url = `https://api.spotify.com/v1/search?q=${searchQuery}&type=artist`;
-  getAuthToken(url)
-    .then( res => {
-      const token = res.data;
-      const params = { headers: { 'Authorization': 'Bearer ' + token }, json: true };
-      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(`https://api.spotify.com/v1/search?q=${searchQuery}&type=artist`, params )
-        .then( succ => console.log(succ.data.artists.items.map(obj => obj.name)))
-        .catch( err => console.log(err));
-    })
-    .catch( err => console.log(err));
-};
+  window.search = search;
 
-window.search = searchSpotify;
+  const retrieveArtist = artistId => {
+    const url = `https://api.spotify.com/v1/artists/${encodeURIComponent(artistId)}`;
+    getAuthToken(url)
+      .then( res => {
+        console.log(res.data);
+      })
+      .catch( err => console.log('retrieveArtist error'));
+  };
+
+  window.retrieveArtist = retrieveArtist;
 
     // axios.get(`/search?string=${query}`)
     // .then((response) => {
