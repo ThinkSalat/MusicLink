@@ -1,2 +1,4 @@
 /node_modules
 /public/awesomplete-gh-pages
+.vscode/
+.vscode/settings.json
