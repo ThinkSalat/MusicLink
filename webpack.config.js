@@ -10,7 +10,10 @@ const config = {
   plugins: [
     new webpack.ProgressPlugin()
   ],
-  devtool: 'source-map'
+  devtool: 'source-map',
+  resolve: {
+    extensions: [".js", "*"]
+  }
 };
 
 module.exports = config;

@@ -942,68 +942,29 @@ module.exports = Cancel;
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_util__ = __webpack_require__(28);
 
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // Express Server is listening on route /authtoken
-  // retrieves auth token from spotify then performs api call on passed in url.
-  const callSpotifyAPI = url => __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/authtoken', {params: {url}});
+  const searchBar = document.getElementById('search');
 
-  //Search Spotify api
-  const search = searchQuery => {
-    const url = `https://api.spotify.com/v1/search?q=${encodeURIComponent(searchQuery)}&type=artist`;
-    callSpotifyAPI(url)
+  searchBar.addEventListener( 'input', e => {
+    e.preventDefault();
+    Object(__WEBPACK_IMPORTED_MODULE_0__util_util__["d" /* search */])(searchBar.value)
       .then( res => {
-        // perform action on Spotify API response
-        console.log(res.data.artists.items);
+        const artistNameArray = res.data.artists.items.map( artist => artist.name);
+        console.log(searchBar.value, artistNameArray);
       })
-      .catch( err => console.log('search query error'));
-  };
+      .catch( err => console.log('err', err));
+  });
 
-  window.search = search;
+window.search = __WEBPACK_IMPORTED_MODULE_0__util_util__["d" /* search */];
+window.retrieveArtist = __WEBPACK_IMPORTED_MODULE_0__util_util__["a" /* retrieveArtist */];
+window.retrieveRelatedArtists = __WEBPACK_IMPORTED_MODULE_0__util_util__["c" /* retrieveRelatedArtists */];
+window.retrieveArtistBio = __WEBPACK_IMPORTED_MODULE_0__util_util__["b" /* retrieveArtistBio */];
 
-  //Retrieve Artist by ID
-  const retrieveArtist = artistId => {
-    const url = `https://api.spotify.com/v1/artists/${encodeURIComponent(artistId)}`;
-    callSpotifyAPI(url)
-      .then( res => {
-        // perform action on Spotify API response
-        console.log(res.data);
-      })
-      .catch( err => console.log('retrieveArtist error'));
-  };
-
-  window.retrieveArtist = retrieveArtist;
-
-
-  //Retrieve Related Artists by ID
-  const retrieveRelatedArtists = artistId => {
-    const url = `https://api.spotify.com/v1/artists/${encodeURIComponent(artistId)}/related-artists`;
-    callSpotifyAPI(url)
-      .then( res => {
-        // perform action on Spotify API response
-        console.log(res.data.artists);
-      })
-      .catch( err => console.log('retrieveRelatedArtists error'));
-  };
-
-  window.retrieveRelatedArtists = retrieveRelatedArtists;
-
-  //Retrieve Artist Bio page by ID
-  const retrieveArtistBio = artistId => {
-    const url = `http://open.spotify.com/artist/${artistId}/about`;
-    __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(url)
-      .then( res => {
-        // perform action on Spotify API response
-        console.log(res.data.artists);
-      })
-      .catch( err => console.log('retrieveArtistBio error'));
-  };
-
-  window.retrieveArtistBio = retrieveArtistBio;
+  
 
 });
 
@@ -1895,6 +1856,68 @@ module.exports = function spread(callback) {
     return callback.apply(null, arr);
   };
 };
+
+
+/***/ }),
+/* 28 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+
+
+// Express Server is listening on route /authtoken
+// retrieves auth token from spotify then performs api call on passed in url.
+const callSpotifyAPI = url => __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/authtoken', {params: {url}});
+
+//Search Spotify api
+const search = searchQuery => {
+  const url = `https://api.spotify.com/v1/search?q=${encodeURIComponent(searchQuery)}&type=artist`;
+  return callSpotifyAPI(url);
+};
+/* harmony export (immutable) */ __webpack_exports__["d"] = search;
+
+
+//Retrieve Artist by ID
+const retrieveArtist = artistId => {
+  const url = `https://api.spotify.com/v1/artists/${encodeURIComponent(artistId)}`;
+  return callSpotifyAPI(url)
+    .then( res => {
+      // perform action on Spotify API response
+      console.log(res.data);
+    })
+    .catch( err => console.log('retrieveArtist error'));
+};
+/* harmony export (immutable) */ __webpack_exports__["a"] = retrieveArtist;
+
+
+
+//Retrieve Related Artists by ID
+const retrieveRelatedArtists = artistId => {
+  const url = `https://api.spotify.com/v1/artists/${encodeURIComponent(artistId)}/related-artists`;
+  return callSpotifyAPI(url)
+    .then( res => {
+      // perform action on Spotify API response
+      console.log(res.data.artists);
+    })
+    .catch( err => console.log('retrieveRelatedArtists error'));
+};
+/* harmony export (immutable) */ __webpack_exports__["c"] = retrieveRelatedArtists;
+
+
+//Retrieve Artist Bio page by ID
+const retrieveArtistBio = artistId => {
+  const url = `http://open.spotify.com/artist/${artistId}/about`;
+  __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(url)
+    .then( res => {
+      // perform action on Spotify API response
+      console.log(res.data.artists);
+    })
+    .catch( err => console.log('retrieveArtistBio error'));
+};
+/* harmony export (immutable) */ __webpack_exports__["b"] = retrieveArtistBio;
+
 
 
 /***/ })

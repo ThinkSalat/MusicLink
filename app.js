@@ -1,7 +1,5 @@
 const axios = require('axios');
 const path = require('path');
-const fetch = require('node-fetch');
-
 const express =  require('express');
 const app = express();
 
