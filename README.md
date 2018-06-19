@@ -37,6 +37,7 @@ MusicLink is a music discovery and research app. Simply search for an artist you
 * Show's artists bio scraped from spotify about page
 * Show's link to artist's spotify page in either web browser link or link to open spotify player
 * Concatenates if reaches bottom of page 
+* Has footer that shows artist's genres
 
 #### 4. Artist Links **(1 Day)**
 * when Artist Node is mounted, creates new nodes for each related artist

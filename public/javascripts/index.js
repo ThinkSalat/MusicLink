@@ -3,7 +3,8 @@ import axios from 'axios';
 document.addEventListener('DOMContentLoaded', () => {
 
   const getAuthToken = url => axios.get('/authtoken', {params: {url}});
-  
+
+  //Search Spotify api
   const search = searchQuery => {
     const url = `https://api.spotify.com/v1/search?q=${encodeURIComponent(searchQuery)}&type=artist`;
     getAuthToken(url)
@@ -15,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.search = search;
 
+  //Retrieve Artist by ID
   const retrieveArtist = artistId => {
     const url = `https://api.spotify.com/v1/artists/${encodeURIComponent(artistId)}`;
     getAuthToken(url)
@@ -25,6 +27,20 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   window.retrieveArtist = retrieveArtist;
+
+
+  //Retrieve Related Artists by ID
+  const retrieveRelatedArtists = artistId => {
+    const url = `https://api.spotify.com/v1/artists/${encodeURIComponent(artistId)}/related-artists`;
+    getAuthToken(url)
+      .then( res => {
+        console.log(res.data.artists);
+      })
+      .catch( err => console.log('retrieveArtist error'));
+  };
+
+  window.retrieveRelatedArtists = retrieveRelatedArtists;
+
 
     // axios.get(`/search?string=${query}`)
     // .then((response) => {
