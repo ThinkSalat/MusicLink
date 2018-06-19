@@ -24,20 +24,19 @@ const authApiOptions = {
       grant_type: "client_credentials"
   },
   headers: {
-      "Accept": "application/json",
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Accept": "application/json"
   },
   auth: {
       username,
       password
-  },
-  redirectUri: 'http://localhost:8000'
+  }
 };
 
 
-// 2. Retrieve Auth Token from Spotify
-// And
-// 3. Perform selected AJAX query
+// Retrieve Auth Token from Spotify
+// Then
+// Perform selected AJAX query
+// Then send response back to requesting function
 app.get('/authtoken', (req, res) => {
   axios(authApiOptions)
   .then( response => {
@@ -66,21 +65,7 @@ app.get('/', (request, res) => {
   res.sendFile(path.join(__dirname, './public/index.html'));
 });
 
-// // Get Artist's Bio
-// app.get('/artists/:id/about', (request, response) => {
-//   // make api call using fetch
-//   // fetch(`https://open.spotify.com/artist/${request.params.id}/about`)
-//   // .then((response) => {
-//   //     return response.text();
-//   // }).then((body) => {
-//   //     let results = JSON.parse(body);
-//   //     console.log(results);   // logs to server
-//   //     response.send(results); // sends to frontend
-//   //   })
-//   //   .catch(err => console.log('bio err',err));
-// });
-
-
+// Set server to listen on POST
 app.listen(PORT, () => {
   console.log(__dirname);
   console.log(`listening on ${PORT}`);
