@@ -1,5 +1,6 @@
 import { search, retrieveArtist, retrieveRelatedArtists, retrieveArtistBio } from '../../util/util';
 import axios from 'axios';
+import {$,jQuery} from 'jquery';
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -21,9 +22,7 @@ window.search = search;
 window.retrieveArtist = retrieveArtist;
 window.retrieveRelatedArtists = retrieveRelatedArtists;
 window.retrieveArtistBio = retrieveArtistBio;
-
-  axios.get('https://cors-escape.herokuapp.com/http%3A//open.spotify.com/artist/13ubrt8QOOCPljQ2FL1Kca/about&callback=?')
-    .then( succ => console.log(succ), err => console.log(err));
+retrieveArtistBio('6C403AR4y6PjN0xNNGh42m')
 
 });
 

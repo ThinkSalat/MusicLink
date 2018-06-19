@@ -7,6 +7,7 @@ const app = express();
 const PORT = process.env.PORT || 8000; 
 
 app.use(express.static('public'));
+app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'));
 
 // AUTH
 
@@ -56,12 +57,16 @@ app.get('/authtoken', (req, res) => {
   .catch( err => console.log('api error'));
 });
 
+// app.get( )
 
 // Express API routes
 // Send API requests here to retrieve data from Spotify's API
 app.get('/', (request, res) => {
   res.sendFile(path.join(__dirname, './public/index.html'));
 });
+
+// Search
+// app.get('/')
 
 // Set server to listen on POST
 app.listen(PORT, () => {
