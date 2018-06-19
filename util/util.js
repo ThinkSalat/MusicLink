@@ -1,5 +1,4 @@
 import axios from 'axios';
-import {$,jQuery} from 'jquery';
 
 
 // Express Server is listening on route /authtoken
@@ -28,18 +27,5 @@ export const retrieveRelatedArtists = artistId => {
 //Retrieve Artist Bio page by ID
 export const retrieveArtistBio = artistId => {
   const url = `http://open.spotify.com/artist/${artistId}/about`;
-  callSpotifyAPI(url)
-    .then( res => {
-      // contains h2 and p elements
-      // class="artist-about-container__paragraph"
-      // this is div that contains all the above
-      console.log('class="artist-about-container__about"');
-      console.log('here');
-      // console.log(res.data);
-      console.log(jQuery);
-      const fullPage = $.parseHTML(res.data)
-        console.log(fullPage);
-      // perform action on Spotify API response
-    })
-    .catch( err => console.log('retrieveArtistBio error', err));
+  return callSpotifyAPI(url);
 };
