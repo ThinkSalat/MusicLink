@@ -948,43 +948,72 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  const getAuthToken = url => __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/authtoken', {params: {url}});
     //Spotify Search
-    let query = "Shabazz Palaces";
-    __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(`/search?string=${query}`)
-    .then((response) => {
-        console.log(response); 
-    })
-    .catch(function (error) {
-        console.log(error);
-    });
+    // let query = "Shabazz Palaces";
+    // let query = "Shabazz";
+    // axios.get('/authtoken')
+    // .then( res => {
+    //   const token = res.data;
+    //   const params = { headers: { 'Authorization': 'Bearer ' + token }, json: true };
+    //   axios.get(`https://api.spotify.com/v1/search?q=${query}&type=artist`, params )
+    //     .then( succ => console.log(succ.data.artists.items.map(obj => obj.name)))
+    //     .catch( err => console.log(err));
+    // })
+    // .catch( err => console.log(err));
 
-    //Spotify Artist Info
-    let id = "6C403AR4y6PjN0xNNGh42m";
-    __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(`/artists/${id}`)
-    .then((response) => {
-        console.log(response);
+const searchSpotify = searchQuery => {
+  const url = `https://api.spotify.com/v1/search?q=${searchQuery}&type=artist`;
+  getAuthToken(url)
+    .then( res => {
+      const token = res.data;
+      const params = { headers: { 'Authorization': 'Bearer ' + token }, json: true };
+      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(`https://api.spotify.com/v1/search?q=${searchQuery}&type=artist`, params )
+        .then( succ => console.log(succ.data.artists.items.map(obj => obj.name)))
+        .catch( err => console.log(err));
     })
-    .catch(function (error) {
-        console.log(error);
-    });
+    .catch( err => console.log(err));
+};
 
-    //Spotify Related Artists
-    // let aId = "6C403AR4y6PjN0xNNGh42m";
-    __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(`/artists/${id}/related-artists`)
-    .then((response) => {
-        console.log(response);
-    })
-    .catch(function (error) {
-        console.log(error);
-    });
+window.search = searchSpotify;
 
-    __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(`https://open.spotify.com/artist/${id}/about`)
-      .then((response)=> {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-    });
+    // axios.get(`/search?string=${query}`)
+    // .then((response) => {
+    //     console.log(response); 
+    // })
+    // .catch(function (error) {
+    //     console.log(error);
+    // });
+
+    // //Spotify Artist Info
+    // let id = "6C403AR4y6PjN0xNNGh42m";
+    // axios.get(`/artists/${id}`)
+    // .then((response) => {
+    //     console.log(response);
+    // })
+    // .catch(function (error) {
+    //     console.log(error);
+    // });
+
+    // //Spotify Related Artists
+    // // let aId = "6C403AR4y6PjN0xNNGh42m";
+    // axios.get(`/artists/${id}/related-artists`)
+    // .then((response) => {
+    //     console.log(response);
+    // })
+    // .catch(function (error) {
+    //     console.log(error);
+    // });
+
+    // axios.get(`/artists/${id}/about`)
+    //   .then((response)=> {
+    //     console.log(response);
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    // });
+
+
 });
 
 

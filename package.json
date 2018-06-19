@@ -14,6 +14,7 @@
   "scripts": {
     "build": "webpack --watch",
     "start": "node app.js",
+    "dev": "nodemon index.js & webpack --watch",
     "start:debug": "DEBUG=* node app.js"
   },
   "dependencies": {
@@ -24,6 +25,7 @@
     "express": "^4.15.3",
     "node-fetch": "^1.7.3",
     "node-sass": "^4.7.2",
+    "nodemon": "^1.17.5",
     "sass-loader": "^6.0.7",
     "webpack": "^3.12.0"
   },
