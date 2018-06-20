@@ -31,27 +31,17 @@ const retrieveArtistBio = artistId => {
   return callSpotifyAPI(url);
 };
 
-export const getArtistBio = (name, id) => {
+export const getArtistBio = ({name, id, url}) => {
   const artistBio = document.getElementById('artist-bio');
+  
+  //load bio from spotify
   artistBio.innerHTML = `Loading bio for ${name}`;
   retrieveArtistBio(id)
   .then( res => {
-    let info;
-    let regEx = /<div class="bio-primary">(.+?rovi)/i;
-    let regexV = 1;
-    if (!res.data.match(regEx)) {
-      regEx = /biography":{"body":"(.+?){/;
-        regexV = 2;
-      }
-
-    info = res.data.match(regEx) ? res.data.match(regEx) : "No info on artist available :(";
-      if (info !== "No info on artist available :("){
-        if (info['1']) info = info['1'].replace(/href="/g,'target="_blank" href="https://open.spotify.com');
-      }
-      if (regexV === 2) {
-        console.log('here');
-        info = info.match(/(.+?)","/)['1']
-      }
+    // use regex to format response
+    const info = extractDataFromResponse(res);
+    //create link to artist's spotfiy page
+    createArtistBioHeader(url, name);
     artistBio.innerHTML = info;
   })
   .catch( err => console.log('retrieveArtistBio error', err));
@@ -66,4 +56,32 @@ export const getArtistBioByName = name => {
       const id = res.data.artists.items.length ? res.data.artists.items[0].id : '';
       getArtistBio(id);  
     });
+};
+
+const createArtistBioHeader = (url, name) => {
+  const artistBioHeader = document.getElementById('artist-bio-header');
+  const artistLink = document.createElement('a');
+  artistLink.href = url;
+  artistLink.target = "_blank";
+  artistLink.innerHTML = name;
+  artistBioHeader.appendChild(artistLink);
+};
+
+const extractDataFromResponse = res => {
+  let info;
+  let regEx = /<div class="bio-primary">(.+?rovi)/i;
+  let regexV = 1;
+  if (!res.data.match(regEx)) {
+    regEx = /biography":{"body":"(.+?){/;
+      regexV = 2;
+    }
+
+  info = res.data.match(regEx) ? res.data.match(regEx) : "No info on artist available :(";
+    if (info !== "No info on artist available :("){
+      if (info['1']) info = info['1'].replace(/href="/g,'target="_blank" href="https://open.spotify.com');
+    }
+    if (regexV === 2) {
+      info = info.match(/(.+?)","/)['1'];
+    }
+  return info;
 };

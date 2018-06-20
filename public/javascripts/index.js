@@ -14,9 +14,10 @@ document.addEventListener('DOMContentLoaded', () => {
         
         //parse results of API call and return name, id and images for artists
         const artists = res.data.artists.items.map( artist => {
+          const url = artist.external_urls['spotify'];
           const { name, id, images } = artist; 
           const imageUrl = (images[images.length-1] || {url: 'default'})['url']; 
-          return {name, id, imageUrl};
+          return {name, id, imageUrl, url};
         });
 
         //create ul containing the results of the query

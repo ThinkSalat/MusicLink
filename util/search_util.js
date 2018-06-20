@@ -1,4 +1,5 @@
-import { retrieveArtist, retrieveRelatedArtists, getArtistBio } from './util';
+import {  getArtistBio } from './util';
+import { addNewPrimaryNode } from './node_util';
 
 export const createAutocompleteList = artists => {
   if (!artists || !artists.length) {
@@ -42,8 +43,6 @@ const createListItem = artist => {
 
 export const handleSearchItemClick = artist => {
   const artistId = artist.id;
-  console.log(artist);
-  retrieveArtist(artistId).then( artistInfo => console.log(artistInfo));
-  retrieveRelatedArtists(artistId).then( artists => console.log(artists));
-  getArtistBio(artist.name, artistId);
+  getArtistBio(artist);
+  addNewPrimaryNode(artistId);
 };

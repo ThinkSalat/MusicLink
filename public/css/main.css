@@ -62,6 +62,7 @@ li div {
 }
 
 .artist-panel {
+  position: fixed;
   width: 300px;
   padding-left: 25px;
   padding-bottom: 25px;
