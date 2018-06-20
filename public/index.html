@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title></title>   
     <script type="text/javascript" src="./bundle.js"></script>
+    <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/main.css">
         <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121099282-1"></script>
@@ -11,17 +12,18 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'UA-121099282-1');
     </script>
     <!-- End Google Analytics -->
   </head>
   <body>
-    <main id='main'></main>
-      <input  id='search' placeholder="Artist's Name">
-        <div id='search-results'></div>
-      </input>
+    <header class="header">
+      <input id='search' placeholder="Artist's Name" />
+      <div id='search-results'></div>
+    </header>
+    <main id='main'>
       <br>
       <div id='artist-bio'></div>
+    </main>
   </body>
 </html>

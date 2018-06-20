@@ -1,4 +1,13 @@
+
+header {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
 li {
+  max-width: 400px;
   list-style-type: none;
   height: auto;
   max-height: 50px;
@@ -11,9 +20,14 @@ li div {
   left: 62px;
 }
 
+#search-results {
+  position: relative;
+  max-width: 400px;
+  /* display: none; */
+}
+
 #list-item span {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-
 }
 
 .list-image {
@@ -21,4 +35,9 @@ li div {
   height: 50px;
   width: 50px; 
   border-radius: 50%;
+}
+
+#search:hover > #search-results {
+  display: block;
+  background-color: black;
 }

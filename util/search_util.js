@@ -1,5 +1,3 @@
-import { EADDRINUSE } from "constants";
-
 export const createAutocompleteList = artists => {
   if (!artists || !artists.length) {
     const emptyList = document.createElement('ul');

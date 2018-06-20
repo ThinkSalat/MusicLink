@@ -24,20 +24,19 @@ document.addEventListener('DOMContentLoaded', () => {
         // select the div below the input to display results.
         const searchResults = document.getElementById('search-results');
         searchResults.innerHTML = '';
-        searchResults.appendChild(createAutocompleteList(artists));
+        searchResults.appendChild(searchResultsList);
         //  console.log('searched for:', searchBar.value, 'referred from ', apiSearchUrl, 'results', artistNameArray);
       })
       .catch( err => console.log('err', err));
+
+  window.retrieveArtist = retrieveArtist;
+  window.retrieveRelatedArtists = retrieveRelatedArtists;
+  window.retrieveArtistBio = retrieveArtistBio;
+  
+  window.getArtistBioByName = getArtistBioByName;
+  window.getArtistBio = getArtistBio;
+  
   });
-
-
-window.search = search;
-window.retrieveArtist = retrieveArtist;
-window.retrieveRelatedArtists = retrieveRelatedArtists;
-window.retrieveArtistBio = retrieveArtistBio;
-
-window.getArtistBioByName = getArtistBioByName;
-window.getArtistBio = getArtistBio;
 
 });
 
