@@ -1,15 +1,16 @@
 import { search, retrieveArtist, retrieveRelatedArtists, retrieveArtistBio, getArtistBio, getArtistBioByName } from '../../util/util';
-import { createAutocompleteList } from '../../util/search_util';
+import { createAutocompleteList, addSearchItemClickHandlers } from '../../util/search_util';
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  // get search input element
   const searchBar = document.getElementById('search');
 
+  // perform calls to spotify api when user enters text into search bar
   searchBar.addEventListener( 'input', e => {
     e.preventDefault();
     search(searchBar.value)
       .then( res => {
-        // const apiSearchUrl = res.config.params.url;
         
         //parse results of API call and return name, id and images for artists
         const artists = res.data.artists.items.map( artist => {
@@ -20,12 +21,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         //create ul containing the results of the query
         const searchResultsList = createAutocompleteList(artists);
-
+        
         // select the div below the input to display results.
         const searchResults = document.getElementById('search-results');
+
+        //clear old results
         searchResults.innerHTML = '';
+
+        //add searchresults under input
         searchResults.appendChild(searchResultsList);
-        //  console.log('searched for:', searchBar.value, 'referred from ', apiSearchUrl, 'results', artistNameArray);
       })
       .catch( err => console.log('err', err));
 

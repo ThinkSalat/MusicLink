@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { inflateRawSync } from 'zlib';
 
 
 // Express Server is listening on route /authtoken
@@ -25,19 +26,32 @@ export const retrieveRelatedArtists = artistId => {
 };
 
 //Retrieve Artist Bio page by ID
-export const retrieveArtistBio = artistId => {
+const retrieveArtistBio = artistId => {
   const url = `http://open.spotify.com/artist/${artistId}/about`;
   return callSpotifyAPI(url);
 };
 
-export const getArtistBio = id => {
+export const getArtistBio = (name, id) => {
+  const artistBio = document.getElementById('artist-bio');
+  artistBio.innerHTML = `Loading bio for ${name}`;
   retrieveArtistBio(id)
   .then( res => {
-    const regEx = /<div class="bio-primary">(.+?)<\/div><\/div><button class="link expand-toggle">Read More<\/button><\/div></;
-    let info = res.data.match(regEx)['1'].replace(/href="/g,'target="_blank" href="https://open.spotify.com');
-    // info = info.replace(/href="/g,'target="_blank" href="https://open.spotify.com');
-    // console.log(info);
-    const artistBio = document.getElementById('artist-bio');
+    let info;
+    let regEx = /<div class="bio-primary">(.+?rovi)/i;
+    let regexV = 1;
+    if (!res.data.match(regEx)) {
+      regEx = /biography":{"body":"(.+?){/;
+        regexV = 2;
+      }
+
+    info = res.data.match(regEx) ? res.data.match(regEx) : "No info on artist available :(";
+      if (info !== "No info on artist available :("){
+        if (info['1']) info = info['1'].replace(/href="/g,'target="_blank" href="https://open.spotify.com');
+      }
+      if (regexV === 2) {
+        console.log('here');
+        info = info.match(/(.+?)","/)['1']
+      }
     artistBio.innerHTML = info;
   })
   .catch( err => console.log('retrieveArtistBio error', err));

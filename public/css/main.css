@@ -34,12 +34,12 @@ li div {
   display: none;
 }
 
-#list-item span {
+.list-item span {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   width: 100%;
 }
 
-#list-item:hover  {
+.list-item:hover  {
   background-color: antiquewhite;
 }
 
@@ -47,9 +47,22 @@ li div {
   height: 50px;
   width: 50px; 
   border-radius: 50%;
+  /* remove to fill circle but look squashed */
+  /* object-fit: contain; */
+  object-fit: cover;
+}
+
+#search-results:hover {
+  display: block;
 }
 
 #search:focus + #search-results {
   display: block;
   /* background-color: black; */
+}
+
+.artist-panel {
+  width: 300px;
+  padding-left: 25px;
+  padding-bottom: 25px;
 }

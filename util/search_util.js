@@ -1,3 +1,5 @@
+import { retrieveArtist, retrieveRelatedArtists, getArtistBio } from './util';
+
 export const createAutocompleteList = artists => {
   if (!artists || !artists.length) {
     const emptyList = document.createElement('ul');
@@ -10,14 +12,15 @@ export const createAutocompleteList = artists => {
   ul.setAttribute('id','name-list');
   artists.forEach( artist => {
     const listItem = createListItem(artist);
+    listItem.addEventListener('click', () => handleSearchItemClick(artist));
     ul.appendChild(listItem);
   });
   return ul;
 };
 
-export const createListItem = artist => {
+const createListItem = artist => {
   const listItem = document.createElement('li');
-  listItem.setAttribute('id', 'list-item');
+  listItem.setAttribute('class', 'list-item');
 
   const artistImage = document.createElement('img');
   artistImage.setAttribute('class', 'list-image');
@@ -35,4 +38,12 @@ export const createListItem = artist => {
   listItem.appendChild(artistNameContainer);
 
   return listItem;
+};
+
+export const handleSearchItemClick = artist => {
+  const artistId = artist.id;
+  console.log(artist);
+  retrieveArtist(artistId).then( artistInfo => console.log(artistInfo));
+  retrieveRelatedArtists(artistId).then( artists => console.log(artists));
+  getArtistBio(artist.name, artistId);
 };
