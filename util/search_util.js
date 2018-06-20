@@ -12,7 +12,6 @@ export const createAutocompleteList = artists => {
     const listItem = createListItem(artist);
     ul.appendChild(listItem);
   });
-  console.log(ul);
   return ul;
 };
 
