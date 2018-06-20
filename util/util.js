@@ -31,17 +31,20 @@ const retrieveArtistBio = artistId => {
   return callSpotifyAPI(url);
 };
 
-export const getArtistBio = ({name, id, url}) => {
+export const getArtistBio = ({name, id, url, genres}) => {
   const artistBio = document.getElementById('artist-bio');
   
   //load bio from spotify
   artistBio.innerHTML = `Loading bio for ${name}`;
   retrieveArtistBio(id)
   .then( res => {
-    // use regex to format response
-    const info = extractDataFromResponse(res);
     //create link to artist's spotfiy page
     createArtistBioHeader(url, name);
+    //add list of artist's genres
+    addArtistGenres(genres);
+    // use regex to format response
+    const info = extractDataFromResponse(res);
+
     artistBio.innerHTML = info;
   })
   .catch( err => console.log('retrieveArtistBio error', err));
@@ -58,8 +61,21 @@ export const getArtistBioByName = name => {
     });
 };
 
+const addArtistGenres = genres => {
+  const genreList = document.getElementById('artist-genres');
+  //reset genrelist
+  genreList.innerHTML = '';
+  
+  let innerText = 'Genres: ';
+  innerText += genres.join(', ');
+  genreList.innerText = innerText;
+};
+
 const createArtistBioHeader = (url, name) => {
   const artistBioHeader = document.getElementById('artist-bio-header');
+  //reset header
+  artistBioHeader.innerHTML = '';
+
   const artistLink = document.createElement('a');
   artistLink.href = url;
   artistLink.target = "_blank";
@@ -75,13 +91,13 @@ const extractDataFromResponse = res => {
     regEx = /biography":{"body":"(.+?){/;
       regexV = 2;
     }
-
+  
   info = res.data.match(regEx) ? res.data.match(regEx) : "No info on artist available :(";
     if (info !== "No info on artist available :("){
       if (info['1']) info = info['1'].replace(/href="/g,'target="_blank" href="https://open.spotify.com');
     }
     if (regexV === 2) {
-      info = info.match(/(.+?)","/)['1'];
+      if (info !== "No info on artist available :(") info = info.match(/(.+?)","/)['1'];
     }
   return info;
 };

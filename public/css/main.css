@@ -67,3 +67,17 @@ li div {
   padding-left: 25px;
   padding-bottom: 25px;
 }
+
+/* nodes / graphs */
+
+
+.node {
+  fill: #ccc;
+  stroke: #fff;
+  stroke-width: 2px;
+}
+
+.link {
+  stroke: #777;
+  stroke-width: 2px;
+}

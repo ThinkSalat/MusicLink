@@ -1,6 +1,9 @@
 import { search, retrieveArtist, retrieveRelatedArtists, retrieveArtistBio, getArtistBio, getArtistBioByName } from '../../util/util';
 import { createAutocompleteList, addSearchItemClickHandlers } from '../../util/search_util';
 
+window.nodes = [];
+window.links = [];
+
 document.addEventListener('DOMContentLoaded', () => {
 
   // get search input element
@@ -15,9 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
         //parse results of API call and return name, id and images for artists
         const artists = res.data.artists.items.map( artist => {
           const url = artist.external_urls['spotify'];
-          const { name, id, images } = artist; 
+          const { name, id, images, genres } = artist; 
           const imageUrl = (images[images.length-1] || {url: 'default'})['url']; 
-          return {name, id, imageUrl, url};
+          return {name, id, imageUrl, url, genres};
         });
 
         //create ul containing the results of the query
