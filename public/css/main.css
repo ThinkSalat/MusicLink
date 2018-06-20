@@ -1,5 +1,24 @@
+li {
+  list-style-type: none;
+  height: auto;
+  max-height: 50px;
+  margin-top: 10px;
+}
+
+li div {
+  position: relative;
+  bottom: 34px;
+  left: 62px;
+}
+
+#list-item span {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+}
 
 .list-image {
+  /* overflow: hidden; */
   height: 50px;
-  width: 50px;
+  width: 50px; 
+  border-radius: 50%;
 }

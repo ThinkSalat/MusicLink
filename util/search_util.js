@@ -1,3 +1,5 @@
+import { EADDRINUSE } from "constants";
+
 export const createAutocompleteList = artists => {
   if (!artists || !artists.length) {
     const emptyList = document.createElement('ul');
@@ -27,12 +29,13 @@ export const createListItem = artist => {
   } else {
     artistImage.setAttribute('src', artist.imageUrl);
   }
-
+  const artistNameContainer = document.createElement('div');
   const artistName = document.createElement('span');
   artistName.innerHTML = artist.name;
+  artistNameContainer.appendChild(artistName);
 
   listItem.appendChild(artistImage);
-  listItem.appendChild(artistName);
+  listItem.appendChild(artistNameContainer);
 
   return listItem;
 };

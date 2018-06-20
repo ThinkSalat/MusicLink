@@ -7,7 +7,7 @@ const callSpotifyAPI = url => axios.get('/authtoken', {params: {url}});
 
 //Search Spotify api
 export const search = searchQuery => {
-  const url = `https://api.spotify.com/v1/search?q=${encodeURIComponent(searchQuery)}&type=artist`;
+  const url = `https://api.spotify.com/v1/search?q=${encodeURIComponent(searchQuery)}&type=artist&limit=5`;
   return callSpotifyAPI(url);
 };
 
