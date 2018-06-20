@@ -1,4 +1,4 @@
-import { search, retrieveArtist, retrieveRelatedArtists, retrieveArtistBio } from '../../util/util';
+import { search, retrieveArtist, retrieveRelatedArtists, retrieveArtistBio, getArtistBio, getArtistBioByName } from '../../util/util';
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -8,27 +8,73 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     search(searchBar.value)
       .then( res => {
-        const artistNameArray = res.data.artists.items.map( artist => artist.name);
-        const artistIdArray = res.data.artists.items.map( artist => artist.id);
-        console.log(searchBar.value, artistNameArray);
-        console.log(searchBar.value, artistIdArray);
+        // const apiSearchUrl = res.config.params.url;
+        
+        //parse results of API call and return name, id and images for artists
+        const artists = res.data.artists.items.map( artist => {
+          const { name, id, images } = artist; 
+          const imageUrl = (images[images.length-1] || {url: 'default'})['url']; 
+          return {name, id, imageUrl};
+        });
+
+        //create ul containing the results of the query
+        const searchResultsList = createAutocompleteList(artists);
+
+        // select the div below the input to display results.
+        const searchResults = document.getElementById('search-results');
+        searchResults.innerHTML = '';
+        searchResults.appendChild(createAutocompleteList(artists));
+        //  console.log('searched for:', searchBar.value, 'referred from ', apiSearchUrl, 'results', artistNameArray);
       })
       .catch( err => console.log('err', err));
   });
+
+  const createAutocompleteList = artists => {
+    if (!artists || !artists.length) {
+      const emptyList = document.createElement('ul');
+      const emptyListItem = document.createElement('li');
+      emptyListItem.innerHTML = "Couldn't find artist with that name";
+      emptyList.appendChild(emptyListItem);
+      return emptyList;
+    }
+    const ul = document.createElement('ul');
+    ul.setAttribute('id','name-list');
+    artists.forEach( artist => {
+      const listItem = createListItem(artist);
+      ul.appendChild(listItem);
+    });
+    console.log(ul);
+    return ul;
+  };
+
+  const createListItem = artist => {
+    const listItem = document.createElement('li');
+    listItem.setAttribute('id', 'list-item');
+
+    const artistImage = document.createElement('img');
+    artistImage.setAttribute('class', 'list-image');
+    if (artist.imageUrl === 'default') {
+      artistImage.setAttribute('src', 'http://groovesharks.org/assets/images/default_avatar.jpg');
+    } else {
+      artistImage.setAttribute('src', artist.imageUrl);
+    }
+
+    const artistName = document.createElement('span');
+    artistName.innerHTML = artist.name;
+
+    listItem.appendChild(artistImage);
+    listItem.appendChild(artistName);
+
+    return listItem;
+  };
 
 window.search = search;
 window.retrieveArtist = retrieveArtist;
 window.retrieveRelatedArtists = retrieveRelatedArtists;
 window.retrieveArtistBio = retrieveArtistBio;
-retrieveArtistBio('6C403AR4y6PjN0xNNGh42m')
-  .then( res => {
-    const regEx = /<div class="bio-primary">(.+?)<\/div><\/div><button class="link expand-toggle">Read More<\/button><\/div></;
-    let info = res.data.match(regEx)['1'];
-    info = info.replace(/href="/g,'target="_blank" href="https://open.spotify.com');
-    // console.log(info);
-    const artistBio = document.getElementById('artist-bio')
-    artistBio.innerHTML = info;
-  })
-  .catch( err => console.log('retrieveArtistBio error', err));
+
+window.getArtistBioByName = getArtistBioByName;
+window.getArtistBio = getArtistBio;
+
 });
 

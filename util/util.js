@@ -29,3 +29,27 @@ export const retrieveArtistBio = artistId => {
   const url = `http://open.spotify.com/artist/${artistId}/about`;
   return callSpotifyAPI(url);
 };
+
+export const getArtistBio = id => {
+  retrieveArtistBio(id)
+  .then( res => {
+    const regEx = /<div class="bio-primary">(.+?)<\/div><\/div><button class="link expand-toggle">Read More<\/button><\/div></;
+    let info = res.data.match(regEx)['1'].replace(/href="/g,'target="_blank" href="https://open.spotify.com');
+    // info = info.replace(/href="/g,'target="_blank" href="https://open.spotify.com');
+    // console.log(info);
+    const artistBio = document.getElementById('artist-bio');
+    artistBio.innerHTML = info;
+  })
+  .catch( err => console.log('retrieveArtistBio error', err));
+  return `retrieving artist bio from artist with id: '${id}'`;
+};
+
+export const getArtistBioByName = name => {
+  const artistBio = document.getElementById('artist-bio');
+  artistBio.innerHTML = `Loading bio for ${name}`;
+  search(name)
+    .then( res => {
+      const id = res.data.artists.items.length ? res.data.artists.items[0].id : '';
+      getArtistBio(id);  
+    });
+};

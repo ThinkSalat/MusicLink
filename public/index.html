@@ -4,10 +4,7 @@
     <meta charset="utf-8">
     <title></title>   
     <script type="text/javascript" src="./bundle.js"></script>
-
-    <link rel="stylesheet" href="./awesomplete-gh-pages/awesomplete.css" />
-    <script src="./awesomplete-gh-pages/awesomplete.js" async></script>
-
+    <link rel="stylesheet" href="./css/main.css">
         <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121099282-1"></script>
     <script>
@@ -21,12 +18,10 @@
   </head>
   <body>
     <main id='main'></main>
-      <input type="text" id="search" placeholder='Artist Name'>
-      <div id='output'></div>
-      <input class="awesomplete"
-       data-list="Ada, Java, JavaScript, Brainfuck, LOLCODE, Node.js, Ruby on Rails" />
-       <div id='artist-bio'>
-
-       </div>
+      <input  id='search' placeholder="Artist's Name">
+        <div id='search-results'></div>
+      </input>
+      <br>
+      <div id='artist-bio'></div>
   </body>
 </html>
