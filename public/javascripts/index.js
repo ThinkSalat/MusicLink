@@ -1,17 +1,11 @@
 import { search, retrieveArtist, retrieveRelatedArtists, retrieveArtistBio, getArtistBio, getArtistBioByName } from '../../util/util';
 import { createAutocompleteList } from '../../util/search_util';
 
-import {tryd3} from './d3'
-window.test = tryd3;
-
 window.nodes = [];
 window.links = [];
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // set dimensions of d3 viz
-  const width = '80vw',
-    height = '80vh';
   // get search input element
   const searchBar = document.getElementById('search');
 

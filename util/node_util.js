@@ -1,10 +1,6 @@
 import { retrieveArtist, retrieveRelatedArtists } from './util';
 
-// import * as d3 from 'd3';
-
-
 export const addNewPrimaryNode = artistId => {
-  console.log(d3, 'd3');
   console.log('clearing nodes');
   nodes = [];
   console.log('adding primary node');

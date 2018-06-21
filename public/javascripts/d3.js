@@ -1,10 +1,7 @@
-import * as d3 from 'd3';
-
-// const nodes = window.nodes;
+const nodes = window.nodes;
 
 var width = 640,
 height = 480;
-
 
 
 // The `links` array contains objects with a `source` and a `target`
