@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { inflateRawSync } from 'zlib';
 
 
 // Express Server is listening on route /authtoken
@@ -86,18 +85,20 @@ const createArtistBioHeader = (url, name) => {
 const extractDataFromResponse = res => {
   let info;
   let regEx = /<div class="bio-primary">(.+?rovi)/i;
+  // let regEx = /bio-primary">.+?(?=\",\")/i;
+  // let regEx = /([bio-primary">|biography":"body":"][bio]*.+?)(?=\"\,\")/i;
   let regexV = 1;
   if (!res.data.match(regEx)) {
     regEx = /biography":{"body":"(.+?){/;
       regexV = 2;
     }
   
-  info = res.data.match(regEx) ? res.data.match(regEx) : "No info on artist available :(";
-    if (info !== "No info on artist available :("){
+  info = res.data.match(regEx) ? res.data.match(regEx) : "Couldn't parse artist page, try spotify link above :)";
+    if (info !== "Couldn't parse artist page, try spotify link above :)"){
       if (info['1']) info = info['1'].replace(/href="/g,'target="_blank" href="https://open.spotify.com');
     }
     if (regexV === 2) {
-      if (info !== "No info on artist available :(") info = info.match(/(.+?)","/)['1'];
+      if (info !== "Couldn't parse artist page, try spotify link above :)") info = info.match(/(.+?)","/)['1'];
     }
   return info;
 };

@@ -61,13 +61,22 @@ li div {
   /* background-color: black; */
 }
 
+header #artist-bio-header {
+  position: sticky;
+  background-color: white;
+}
+::-webkit-scrollbar { 
+  display: none; 
+}
 .artist-panel {
   position: fixed;
   width: 300px;
+  height: 85vh;
   padding-left: 25px;
   padding-bottom: 25px;
+  height: 85vh;
+  overflow-y: scroll;
 }
-
 /* nodes / graphs */
 
 

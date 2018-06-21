@@ -1,11 +1,17 @@
 import { search, retrieveArtist, retrieveRelatedArtists, retrieveArtistBio, getArtistBio, getArtistBioByName } from '../../util/util';
-import { createAutocompleteList, addSearchItemClickHandlers } from '../../util/search_util';
+import { createAutocompleteList } from '../../util/search_util';
+
+import { tryd3 } from '../../node_util'
+window.test = tryd3;
 
 window.nodes = [];
 window.links = [];
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  // set dimensions of d3 viz
+  const width = '80vw',
+    height = '80vh';
   // get search input element
   const searchBar = document.getElementById('search');
 
@@ -14,7 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     search(searchBar.value)
       .then( res => {
-        
         //parse results of API call and return name, id and images for artists
         const artists = res.data.artists.items.map( artist => {
           const url = artist.external_urls['spotify'];

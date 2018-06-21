@@ -1,6 +1,13 @@
 import { retrieveArtist, retrieveRelatedArtists } from './util';
 
+// import * as d3 from 'd3';
+import { $ } from 'jquery';
+
+
 export const addNewPrimaryNode = artistId => {
+  console.log(d3, 'd3');
+  console.log('clearing nodes');
+  nodes = [];
   console.log('adding primary node');
   retrieveArtist(artistId)
     .then( artistInfo => {
@@ -19,16 +26,14 @@ const addRelatedArtistNodes = (primaryNode, artistId) => {
         // check if artist exists in nodes
         if(uniqueNode(artist.id)) nodes.push(artist);
         addLinksToCurrentNodes(artist);
-    })
+    });
   });
 
 };
 
 const uniqueNode = artistId => {
-  console.log('checking unqiuness of node');
   return true;
-}
+};
 
 const addLinksToCurrentNodes = node => {
- console.log('add link to primary node');
-}
+};
