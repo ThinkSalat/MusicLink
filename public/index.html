@@ -8,41 +8,13 @@
   <script src="https://d3js.org/d3.v5.min.js"></script>
   <!-- <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script> -->
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-  <script src="https://sdk.scdn.co/spotify-player.js"></script>
-  <script>
-    window.onSpotifyWebPlaybackSDKReady = () => {
-  const token = 'BQBBvrnlg5qdMfMYDBGzK6hbSuTAm9Nlox0oqcIY7raCaa_Af3vxdP3WjRs5bm8Fv1OWd3Vp5a0icKCpgijcqJ3G8WtDZ9bc5Tri0qJZhgGEadV8sCYQnc-bm8QaSgv_ze5VmNJgy8vspVuuoMw5m-jEynOtkLJlYlE8';
-  const player = new Spotify.Player({
-    name: 'Web Playback SDK Quick Start Player',
-    getOAuthToken: cb => { cb(token); }
-  });
 
-  // Error handling
-  player.addListener('initialization_error', ({ message }) => { console.error(message); });
-  player.addListener('authentication_error', ({ message }) => { console.error(message); });
-  player.addListener('account_error', ({ message }) => { console.error(message); });
-  player.addListener('playback_error', ({ message }) => { console.error(message); });
-
-  // Playback status updates
-  player.addListener('player_state_changed', state => { console.log(state); });
-
-  // Ready
-  player.addListener('ready', ({ device_id }) => {
-    console.log('Ready with Device ID', device_id);
-  });
-
-  // Not Ready
-  player.addListener('not_ready', ({ device_id }) => {
-    console.log('Device ID has gone offline', device_id);
-  });
-
-  // Connect to the player!
-  player.connect();
-};
-  </script>
 
   <link rel="stylesheet" href="./css/reset.css">
   <link rel="stylesheet" href="./css/main.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+
+
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121099282-1"></script>
   <script>
@@ -59,9 +31,17 @@
 
 <body>
   <header class="header">
+    <div class='logo-container'>
+      <div class='logo'> </div>
+    </div>
     <div class='search-container'>
       <input id='search' placeholder="Artist's Name" autocomplete="off"/>
       <div id='search-results'></div>
+    </div>
+    <div class='personal-icons'>
+      <a href='https://github.com/ThinkSalat' target='_blank'><i class="fab fa-github-square github"></i></a>
+      <a href='https://www.linkedin.com/in/shawnsalat/' target='_blank'><i class="fab fa-linkedin linkedin"></i></a>
+      <a href='http://thinksalat.com/' target='_blank'><i class="fas fa-portrait portfolio"></i></a>
     </div>
   </header>
   <main id='main'>

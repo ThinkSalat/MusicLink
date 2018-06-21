@@ -60,6 +60,7 @@ export const getArtistBio = ({name, id, url, genres}) => {
     //add artist's top songs to player
     addArtistPlayer(id);
     
+    artistBio.innerHTML = bio;
   })
   .catch( err => console.log('retrieveArtistBio error', err));
   return `retrieving artist bio from artist with id: '${id}'`;

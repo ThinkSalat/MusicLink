@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // get search input element
   const searchBar = document.getElementById('search');
 
+let nodeIds = [];
+
   // perform calls to spotify api when user enters text into search bar
   searchBar.addEventListener( 'input', e => {
     e.preventDefault();
