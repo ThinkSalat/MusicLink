@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { $ } from 'jquery';
 
 
 // Express Server is listening on route /authtoken
@@ -37,6 +38,8 @@ export const getArtistBio = ({name, id, url, genres}) => {
   artistBio.innerHTML = `Loading bio for ${name}`;
   retrieveArtistBio(id)
   .then( res => {
+    let html = $.parseHTML(res.data)
+    debugger
     //create link to artist's spotfiy page
     createArtistBioHeader(url, name);
     //add list of artist's genres

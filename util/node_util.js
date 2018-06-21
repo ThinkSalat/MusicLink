@@ -1,7 +1,6 @@
 import { retrieveArtist, retrieveRelatedArtists } from './util';
 
 // import * as d3 from 'd3';
-import { $ } from 'jquery';
 
 
 export const addNewPrimaryNode = artistId => {

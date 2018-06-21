@@ -1,7 +1,7 @@
 import { search, retrieveArtist, retrieveRelatedArtists, retrieveArtistBio, getArtistBio, getArtistBioByName } from '../../util/util';
 import { createAutocompleteList } from '../../util/search_util';
 
-import { tryd3 } from '../../node_util'
+import {tryd3} from './d3'
 window.test = tryd3;
 
 window.nodes = [];
