@@ -20,4 +20,8 @@ export default class Node {
     getArtistBio(this.id);
     addNewPrimaryNode(this.id);
   }
+
+  addLinks() {
+    
+  }
 }

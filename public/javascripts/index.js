@@ -1,6 +1,7 @@
 import { search, retrieveArtist, retrieveRelatedArtists, retrieveArtistBio, getArtistBio, getArtistBioByName } from '../../util/util';
 import { createAutocompleteList } from '../../util/search_util';
-import { redraw, clearNodes } from './d3';
+// import { redraw, clearNodes } from './d3';
+import { clearNodes } from './d3';
 
 window.nodes = [];
 window.links = [];
@@ -51,9 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
   $('.clear-button').on('click', clearNodes);
 
   //Resizing svg logic
-  redraw();
-  // Redraw based on the new size whenever the browser window is resized.
-  window.addEventListener("resize", redraw);
+  // redraw();
+  // // Redraw based on the new size whenever the browser window is resized.
+  // window.addEventListener("resize", redraw);
 
 });
 

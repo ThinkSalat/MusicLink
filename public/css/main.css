@@ -169,8 +169,8 @@ header#artist-bio-header {
 
 .artist-panel a {
   font-family: spotifont-bold;
-text-decoration: none;
-color: #C60F7B;
+  text-decoration: none;
+  color: #C60F7B;
 }
 
 #artist-genres {
@@ -217,11 +217,9 @@ color: #C60F7B;
   stroke-width: 2px;
 }
 
+#d3-canvas {
+  background-color: rgba(0, 0, 0, 0.349);
+
+}
 
 /*  TEST */
-
-svg {
-  background-color: rgba(0, 0, 0, 0.349);
-  display: flex;
-  justify-content: center;
-}

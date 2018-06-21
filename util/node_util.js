@@ -11,7 +11,6 @@ export const addNewPrimaryNode = artistId => {
     }
   }
 
-
   //clearing svg canvas
   $("#d3-canvas").html('');
   // adding primary node
@@ -31,7 +30,6 @@ export const addNewPrimaryNode = artistId => {
   addRelatedArtistNodes('node', artistId);
 };
 
-
 const addRelatedArtistNodes = (primaryNode, artistId) => {
   //retreiving related artists
   retrieveRelatedArtists(artistId)
@@ -46,6 +44,7 @@ const addRelatedArtistNodes = (primaryNode, artistId) => {
         artist.secondary = false;
         artist.tertiary = true;
       } else {
+        console.log('not unique');
         //find artist's ndoe and select it and st aristNoe to
       }
       addLinksToThisNode(artistNode);
@@ -59,7 +58,6 @@ const addRelatedArtistNodes = (primaryNode, artistId) => {
 const uniqueNode = artistId => {
   //Must IMPLEMENT 
   window.nodes.forEach( node => {
-    if (node.id !== artistId) console.log('same node~');
     if (node.id === artistId) return false;
   });
   return true;

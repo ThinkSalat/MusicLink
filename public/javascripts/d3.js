@@ -1,32 +1,39 @@
 //change svg size to rsize with window
-export const redraw = () => {
-  const svg = d3.select('svg');
+// export const redraw = () => {
+//   const svg = d3.select('svg');
 
-  let width = window.innerWidth,
-  height = window.innerHeight;
+//   let oldWidth = $('svg').width(),
+//     oldHeight = $('svg').height();
+
+//   let width = window.innerWidth,
+//   height = window.innerHeight;
+
+//   let widthDiff = oldWidth - width,
+//     heightDiff = oldHeight - height;
   
-  svg.attr("width", width)
-    .attr("height", height);
-  // 
-  let centerW = Math.floor(window.innerWidth / 2),
-  centerH = Math.floor(window.innerHeight / 2);
-  if (nodes[0]) {
-    console.log(nodes[0].x);
-    nodes[0].x = centerW;
-    nodes[0].y = centerH;
-  }
-};
+//   svg.attr("width", width)
+//     .attr("height", height);
+  
+//   // let centerW = Math.floor(window.innerWidth / 2),
+//   // centerH = Math.floor(window.innerHeight / 2);
+//   if (node[0]) console.log(Object.keys(node[0]));
+//   nodes.forEach( node => {
+//     node.x -= widthDiff;
+//     node.y -= heightDiff;
+//   });
+// };
 
 // clear nodes
 export const clearNodes = () => {
   window.nodes = [];
+  window.links = [];
   d3.select('svg').remove();
 };
 
 // Create new chart
 export const createD3 = () => {
-  const nodes = window.nodes;
-  const links = window.links;
+  const nodes = window.nodes,
+    links = window.links;
 
   let width = window.innerWidth,
   height = window.innerHeight;
