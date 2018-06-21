@@ -1,34 +1,41 @@
 import { retrieveArtist, retrieveRelatedArtists } from './util';
+import Node from '../public/javascripts/node';
+import { createD3 } from '../public/javascripts/d3';
 
 export const addNewPrimaryNode = artistId => {
-  console.log('clearing nodes');
+  //clearing svg canvas
+  $("#d3-canvas").html('');
+  //clearing nodes
   window.nodes = [];
-  console.log('adding primary node');
+  // adding primary node
   retrieveArtist(artistId)
-    .then( artistInfo => {
-      window.nodes.push(artistInfo.data);
+    .then( ({ data }) => {
+      window.nodes.push(data);
     });
-  console.log(window.nodes);
   addRelatedArtistNodes('node', artistId);
 };
 
 
 const addRelatedArtistNodes = (primaryNode, artistId) => {
-  console.log('retereiving related artsits');
+  //retreiving related artists
   retrieveRelatedArtists(artistId)
   .then( res => {
     res.data.artists.forEach(artist => {
-        // check if artist exists in nodes
-        if(uniqueNode(artist.id)) window.nodes.push(artist);
-        addLinksToCurrentNodes(artist);
+      // check if artist exists in nodes
+      if(uniqueNode(artist.id)) window.nodes.push(artist);
+      addLinksToCurrentNodes(artist);
     });
+  })
+  .then( () => {
+    createD3();
   });
-
 };
 
 const uniqueNode = artistId => {
+  //Must IMPLEMENT 
   return true;
 };
 
 const addLinksToCurrentNodes = node => {
+ //IMPLEMENT CORRECTLY
 };

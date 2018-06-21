@@ -31,7 +31,13 @@ li div {
 }
 
 #search-results {
+  position: fixed;
   display: none;
+  top: 39px;
+  z-index: 50;
+  width: 298px;
+
+  background-color: white;
 }
 
 .list-item span {
@@ -61,10 +67,19 @@ li div {
   /* background-color: black; */
 }
 
-header #artist-bio-header {
-  position: sticky;
+header#artist-bio-header {
+  z-index: 5;
+  position: fixed;
+  top: 65px;
   background-color: white;
+  left: 0px;
+  width: 300px;
 }
+
+#artist-genres {
+  margin-top: 46px;
+}
+
 ::-webkit-scrollbar { 
   display: none; 
 }
@@ -76,6 +91,13 @@ header #artist-bio-header {
   padding-bottom: 25px;
   height: 85vh;
   overflow-y: scroll;
+}
+
+/* Canvas */
+#d3-canvas {
+  position: relative;
+  /* top: 99px;  */
+  left: 200px;
 }
 /* nodes / graphs */
 
@@ -90,3 +112,4 @@ header #artist-bio-header {
   stroke: #777;
   stroke-width: 2px;
 }
+
