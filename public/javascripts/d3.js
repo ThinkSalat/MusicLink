@@ -15,10 +15,6 @@ var links = [
 // Here's were the code begins. We start off by creating an SVG
 // container to hold the visualization. We only need to specify
 // the dimensions for this container.
-export const tryd3 = () => {
-
-  console.log(d3, 'd3');
-}
 
 var svg = d3.select('d3-canvas').append('svg')
 .attr('width', width)

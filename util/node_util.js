@@ -2,13 +2,13 @@ import { retrieveArtist, retrieveRelatedArtists } from './util';
 
 export const addNewPrimaryNode = artistId => {
   console.log('clearing nodes');
-  nodes = [];
+  window.nodes = [];
   console.log('adding primary node');
   retrieveArtist(artistId)
     .then( artistInfo => {
-      nodes.push(artistInfo.data);
+      window.nodes.push(artistInfo.data);
     });
-  console.log(nodes);
+  console.log(window.nodes);
   addRelatedArtistNodes('node', artistId);
 };
 
@@ -19,7 +19,7 @@ const addRelatedArtistNodes = (primaryNode, artistId) => {
   .then( res => {
     res.data.artists.forEach(artist => {
         // check if artist exists in nodes
-        if(uniqueNode(artist.id)) nodes.push(artist);
+        if(uniqueNode(artist.id)) window.nodes.push(artist);
         addLinksToCurrentNodes(artist);
     });
   });
