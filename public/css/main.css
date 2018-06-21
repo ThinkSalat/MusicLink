@@ -198,6 +198,22 @@ color: #C60F7B;
   position: fixed;
   left: 350px;
 }
+/* 
+.svg-container {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%; 
+  vertical-align: top;
+  overflow: hidden;
+}
+.svg-content-responsive {
+  display: inline-block;
+  position: absolute;
+  top: 10px;
+  left: 0;
+}
+*/
 /* nodes / graphs */
 
 
