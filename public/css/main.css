@@ -5,6 +5,9 @@ display: flex;
 flex-direction: row; 
 justify-content: center;
 }
+body {
+  background-color: #96C0B7;
+}
 
 li {
   max-width: 400px;
@@ -37,7 +40,7 @@ li div {
   z-index: 50;
   width: 298px;
 
-  background-color: white;
+  background-color: #96C0B7;
 }
 
 .list-item span {
@@ -46,7 +49,7 @@ li div {
 }
 
 .list-item:hover  {
-  background-color: antiquewhite;
+  background-color: #FEF6C9;
 }
 
 .list-image {
@@ -64,16 +67,15 @@ li div {
 
 #search:focus + #search-results {
   display: block;
-  /* background-color: black; */
 }
 
 header#artist-bio-header {
   z-index: 5;
   position: fixed;
   top: 65px;
-  background-color: white;
+  background-color: #FEF6C9;
   left: 0px;
-  width: 300px;
+  width: 310px;
 }
 
 #artist-genres {
@@ -84,20 +86,20 @@ header#artist-bio-header {
   display: none; 
 }
 .artist-panel {
+  display: none;
+  background-color: #FEF6C9;
   position: fixed;
   width: 300px;
   height: 85vh;
-  padding-left: 25px;
-  padding-bottom: 25px;
+  padding: 25px;
   height: 85vh;
   overflow-y: scroll;
 }
 
 /* Canvas */
 #d3-canvas {
-  position: relative;
-  /* top: 99px;  */
-  left: 200px;
+  position: fixed;
+  left: 350px;
 }
 /* nodes / graphs */
 

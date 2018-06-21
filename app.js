@@ -51,7 +51,7 @@ app.get('/authtoken', (req, res) => {
     axios.get(url, params)
       //Send back Spotify response to internal API call
       .then( apiRes => res.send(apiRes.data))
-      .catch( err => console.log('spotify api call err'));
+      .catch( err => console.log('spotify api call err', err));
   })
   .catch( err => console.log('api error'));
 });

@@ -12,14 +12,19 @@ export const search = searchQuery => {
 
 //Retrieve Artist by ID
 export const retrieveArtist = artistId => {
-  const url = `https://api.spotify.com/v1/artists/${encodeURIComponent(artistId)}`;
+  const url = `https://api.spotify.com/v1/artists/${artistId}`;
   return callSpotifyAPI(url);
 };
 
+//Retrieve Artist's Top Songs by ID
+export const retrieveArtistTopSongs = artistId => {
+  const url =`https://api.spotify.com/v1/artists/${artistId}/top-tracks?country=us`;
+  return callSpotifyAPI(url);
+};
 
 //Retrieve Related Artists by ID
 export const retrieveRelatedArtists = artistId => {
-  const url = `https://api.spotify.com/v1/artists/${encodeURIComponent(artistId)}/related-artists`;
+  const url = `https://api.spotify.com/v1/artists/${artistId}/related-artists`;
   return callSpotifyAPI(url);
 };
 
@@ -29,38 +34,40 @@ const retrieveArtistBio = artistId => {
   return callSpotifyAPI(url);
 };
 
-const testHTML = html => {
-  let len = html.length;
-  for (let index = 0; index < len; index++) {
-    const element = html[index];
-    console.log(element);
-    
-  }
-};
-
-window.testHTML = testHTML;
-
 export const getArtistBio = ({name, id, url, genres}) => {
   const artistBio = document.getElementById('artist-bio');
-  
+
+  //display artistBio
+  $('.artist-panel').css('display','block');
   //load bio from spotify
   artistBio.innerHTML = `Loading bio for ${name}`;
   retrieveArtistBio(id)
   .then( res => {
+    //parse response html
     let html = $.parseHTML(res.data);
+    //set bio to the section with class bio, or artist-bio if that section doesn't exist
     let bio = $(html).find('.bio');
     if (!bio[0]) bio = $(html).find('.artist-bio');
+    //Remove "Read More" button
     bio.find('button').remove();
+    //Changes links from relative links to spotify links that open in new tab
     bio =  $(bio[0]).prop('outerHTML').replace(/href="/g,'target="_blank" href="https://open.spotify.com');
     //create link to artist's spotfiy page
     createArtistBioHeader(url, name);
     //add list of artist's genres
     addArtistGenres(genres);
-    //Set links to actual spotify links
 
+    //set playerPanel to artist's top songs
+    retrieveArtistTopSongs(id)
+      .then( ({ data: { tracks }}) => {
+        console.log(tracks);
 
-    // artistBio.innerHTML = info;
-    artistBio.innerHTML = bio;
+        const topTrackNames = tracks.map(track => track.name)
+        
+        // artistBio.innerHTML = info;
+        artistBio.innerHTML = bio;
+      })
+      .catch( err => console.log('retrieveTopSongErrors', err))
   })
   .catch( err => console.log('retrieveArtistBio error', err));
   return `retrieving artist bio from artist with id: '${id}'`;

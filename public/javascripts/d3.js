@@ -4,8 +4,13 @@ export const createD3 = () => {
 const nodes = window.nodes
 nodes.forEach( node => console.log(node))
 // Set svg size to 80% of window
-const width = Math.floor(window.innerWidth * .8),
-height = Math.floor(window.innerHeight * .8);
+// const width = Math.floor(window.innerWidth * .8),
+// height = Math.floor(window.innerHeight * .8);
+let width = window.innerWidth -150,
+height = window.innerHeight-120;
+
+//  width = 1000;
+// height = 1000;
 
 // set svg to be height and width
 const svg = d3.select('#d3-canvas')
@@ -22,7 +27,7 @@ const simulation = d3.forceSimulation()
 // s stuff
 function getNodeColor(node) {
   // return node.level === 1 ? 'red' : 'gray';
-  return 'red';
+  return '#C60F7B';
 }
 console.log(nodes);
 const nodeElements = svg.append('g')
