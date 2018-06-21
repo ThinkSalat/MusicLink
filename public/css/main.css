@@ -202,22 +202,7 @@ color: #C60F7B;
   top: 0px;
   bottom: 0px;
 }
-/* 
-.svg-container {
-  display: inline-block;
-  position: relative;
-  width: 100%;
-  padding-bottom: 100%; 
-  vertical-align: top;
-  overflow: hidden;
-}
-.svg-content-responsive {
-  display: inline-block;
-  position: absolute;
-  top: 10px;
-  left: 0;
-}
-*/
+
 /* nodes / graphs */
 
 
@@ -232,3 +217,11 @@ color: #C60F7B;
   stroke-width: 2px;
 }
 
+
+/*  TEST */
+
+svg {
+  background-color: rgba(0, 0, 0, 0.349);
+  display: flex;
+  justify-content: center;
+}

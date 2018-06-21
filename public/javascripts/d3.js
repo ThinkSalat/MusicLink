@@ -1,35 +1,35 @@
-
+//change svg size to rsize with window
 export const redraw = () => {
-  console.log('redrawing');
-  var chartDiv = document.getElementById("d3-canvas");
+  const svg = d3.select('svg');
 
-  const width = chartDiv.clientWidth;
-  const height = chartDiv.clientHeight;
-  const svg = d3.select('#d3-canvas');
-
-  svg
-  .attr("width", width)
-  .attr("height", height);
-
+  let width = window.innerWidth,
+  height = window.innerHeight;
+  
+  svg.attr("width", width)
+    .attr("height", height);
+  // 
+  let centerW = Math.floor(window.innerWidth / 2),
+  centerH = Math.floor(window.innerHeight / 2);
+  if (nodes[0]) {
+    console.log(nodes[0].x);
+    nodes[0].x = centerW;
+    nodes[0].y = centerH;
+  }
 };
 
+// clear nodes
 export const clearNodes = () => {
   window.nodes = [];
   d3.select('svg').remove();
-  createD3();
 };
 
+// Create new chart
 export const createD3 = () => {
   const nodes = window.nodes;
   const links = window.links;
-  // Set svg size to 80% of window
-  // const width = Math.floor(window.innerWidth * .8),
-  // height = Math.floor(window.innerHeight * .8);
-  let width = window.innerWidth -150,
-  height = window.innerHeight-120;
 
-  //  width = 1000;
-  // height = 1000;
+  let width = window.innerWidth,
+  height = window.innerHeight;
 
   // set svg to be height and width
   const svg = d3.select('#d3-canvas')
@@ -38,24 +38,18 @@ export const createD3 = () => {
     .attr('height', height)
     .data(window.nodes);
 
-    //  preserve aspect ratio on resize - IMPLEMENT LATER
-    // .attr("preserveAspectRatio", "xMinYMin meet")
-    // .attr("viewBox", "0 0 600 400")
-    // //class to make it responsive
-    // .classed("svg-content-responsive", true); 
-
   // set force simulation
   const simulation = d3.forceSimulation()
-  .force('charge', d3.forceManyBody().strength(-20)) 
-  .force('center', d3.forceCenter(width / 2, height / 2));
+    .force('charge', d3.forceManyBody().strength(-15)) 
+    .force('center', d3.forceCenter(width / 2, height / 2));
 
-  // s stuff
+  // select colors
   function getNodeColor(node) {
     // color for seconday #face1a
-    
+    if (node.secondary) return '#face1a';
     return !node.primary ? '#13ebc0' : '#C60F7B';
   }
-  console.log(nodes);
+
   const nodeElements = svg.append('g')
     .selectAll('circle')
     .data(nodes)
