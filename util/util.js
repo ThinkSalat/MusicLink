@@ -57,16 +57,9 @@ export const getArtistBio = ({name, id, url, genres}) => {
     createArtistBioHeader(url, name);
     //add list of artist's genres
     addArtistGenres(genres);
-
-    //set playerPanel to artist's top songs
-    retrieveArtistTopSongs(id)
-      .then( ({ data: { tracks }}) => {
-        // send tracks to player
-        sendTracksToPlayer(tracks)
-        //add info to Artist Panel
-        artistBio.innerHTML = bio;
-      })
-      .catch( err => console.log('retrieveTopSongErrors', err))
+    //add artist's top songs to player
+    addArtistPlayer(id);
+    
   })
   .catch( err => console.log('retrieveArtistBio error', err));
   return `retrieving artist bio from artist with id: '${id}'`;
@@ -81,6 +74,14 @@ export const getArtistBioByName = name => {
       getArtistBio(id);  
     });
 };
+
+const addArtistPlayer = id => {
+  const playerPanel = $(".player-panel");
+  const embedPlayer = $(`<iframe src='https://open.spotify.com/embed/artist/${id}' width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`)
+  playerPanel.html('');
+  playerPanel.append(embedPlayer);
+  playerPanel.css('display','block');
+}
 
 const addArtistGenres = genres => {
   const genreList = document.getElementById('artist-genres');

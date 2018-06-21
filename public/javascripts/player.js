@@ -1,11 +1,20 @@
+const addSongsToPlaylist = songUris => {
+
+}
+const removeSongsFromPlaylist = () => {
+  
+}
+
 export const sendTracksToPlayer = tracks => {
-  console.log(tracks);
   const topTrackNames = tracks.map(track => track.name);
   const trackUris = tracks.map(track => track.uri);
+  console.log(trackUris);
   console.log(topTrackNames);
   //Send to player here
-  $(".player-panel").css('display','block');
+  const playerPanel = $(".player-panel");
+  playerPanel.css('display','block');
+  const embedPlayer = $(`<iframe src='https://open.spotify.com/embed/artist/${artistId}' width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`)
 //create this w proper url
- //<iframe src="https://open.spotify.com/embed/album/6pkQfQc58FFRwpdqOxJizg" width="300" height="380" frameborder="1" allowtransparency="true"></iframe>
+//<iframe src=`https://open.spotify.com/embed/artist/${artistId}` width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
 
 };
