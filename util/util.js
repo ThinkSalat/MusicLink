@@ -17,12 +17,6 @@ export const retrieveArtist = artistId => {
   return callSpotifyAPI(url);
 };
 
-//Retrieve Artist's Top Songs by ID
-export const retrieveArtistTopSongs = artistId => {
-  const url =`https://api.spotify.com/v1/artists/${artistId}/top-tracks?country=us`;
-  return callSpotifyAPI(url);
-};
-
 //Retrieve Related Artists by ID
 export const retrieveRelatedArtists = artistId => {
   const url = `https://api.spotify.com/v1/artists/${artistId}/related-artists`;

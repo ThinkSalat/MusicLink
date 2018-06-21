@@ -54,18 +54,14 @@ simulation.nodes(nodes).on('tick', () => {
     .attr('y', node => node.y);
 });
 
-// The `links` array contains objects with a `source` and a `target`
-// property. The values of those properties are the indices in
-// the `nodes` array of the two endpoints of the link.
+simulation.force('link', d3.forceLink()
+  .id(link => link.id)
+  .strength(link => link.strength))
 
-// Here's were the code begins. We start off by creating an SVG
-// container to hold the visualization. We only need to specify
-// the dimensions for this container.
-
-// var svg = d3.select('d3-canvas').append('svg')
-// .attr('width', width)
-// .attr('height', height)
-// .data(window.nodes);
-
-// injexxt to d3-canvas
+  const linkElements = svg.append('g')
+  .selectAll('line')
+  .data(links)
+  .enter().append('line')
+    .attr('stroke-width', 1)
+    .attr('stroke', '#E5E5E5')
 }

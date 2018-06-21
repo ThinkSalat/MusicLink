@@ -1,4 +1,4 @@
-import { search, retrieveArtist,retrieveArtistTopSongs, retrieveRelatedArtists, retrieveArtistBio, getArtistBio, getArtistBioByName } from '../../util/util';
+import { search, retrieveArtist, retrieveRelatedArtists, retrieveArtistBio, getArtistBio, getArtistBioByName } from '../../util/util';
 import { createAutocompleteList } from '../../util/search_util';
 
 
