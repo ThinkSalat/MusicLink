@@ -8,6 +8,38 @@
   <script src="https://d3js.org/d3.v5.min.js"></script>
   <!-- <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script> -->
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://sdk.scdn.co/spotify-player.js"></script>
+  <script>
+    window.onSpotifyWebPlaybackSDKReady = () => {
+  const token = 'BQBBvrnlg5qdMfMYDBGzK6hbSuTAm9Nlox0oqcIY7raCaa_Af3vxdP3WjRs5bm8Fv1OWd3Vp5a0icKCpgijcqJ3G8WtDZ9bc5Tri0qJZhgGEadV8sCYQnc-bm8QaSgv_ze5VmNJgy8vspVuuoMw5m-jEynOtkLJlYlE8';
+  const player = new Spotify.Player({
+    name: 'Web Playback SDK Quick Start Player',
+    getOAuthToken: cb => { cb(token); }
+  });
+
+  // Error handling
+  player.addListener('initialization_error', ({ message }) => { console.error(message); });
+  player.addListener('authentication_error', ({ message }) => { console.error(message); });
+  player.addListener('account_error', ({ message }) => { console.error(message); });
+  player.addListener('playback_error', ({ message }) => { console.error(message); });
+
+  // Playback status updates
+  player.addListener('player_state_changed', state => { console.log(state); });
+
+  // Ready
+  player.addListener('ready', ({ device_id }) => {
+    console.log('Ready with Device ID', device_id);
+  });
+
+  // Not Ready
+  player.addListener('not_ready', ({ device_id }) => {
+    console.log('Device ID has gone offline', device_id);
+  });
+
+  // Connect to the player!
+  player.connect();
+};
+  </script>
 
   <link rel="stylesheet" href="./css/reset.css">
   <link rel="stylesheet" href="./css/main.css">
@@ -41,6 +73,9 @@
       <div id='artist-bio'></div>
     </section>
     <section id='d3-canvas'></section>
+    <section class='player-panel' id='player-panel'>
+      <iframe src="https://open.spotify.com/embed/user/126488916/playlist/4h0bokEEuVtunDpJUpbIzE" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+    </section>
 
   </main>
 </body>

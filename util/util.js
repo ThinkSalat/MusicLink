@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { sendTracksToPlayer } from '../public/javascripts/player';
 
 // Express Server is listening on route /authtoken
 // retrieves auth token from spotify then performs api call on passed in url.
@@ -60,11 +61,9 @@ export const getArtistBio = ({name, id, url, genres}) => {
     //set playerPanel to artist's top songs
     retrieveArtistTopSongs(id)
       .then( ({ data: { tracks }}) => {
-        console.log(tracks);
-
-        const topTrackNames = tracks.map(track => track.name)
-        
-        // artistBio.innerHTML = info;
+        // send tracks to player
+        sendTracksToPlayer(tracks)
+        //add info to Artist Panel
         artistBio.innerHTML = bio;
       })
       .catch( err => console.log('retrieveTopSongErrors', err))

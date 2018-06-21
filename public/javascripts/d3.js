@@ -2,7 +2,6 @@
 export const createD3 = () => {
 
 const nodes = window.nodes
-nodes.forEach( node => console.log(node))
 // Set svg size to 80% of window
 // const width = Math.floor(window.innerWidth * .8),
 // height = Math.floor(window.innerHeight * .8);

@@ -6,8 +6,11 @@ flex-direction: row;
 justify-content: center;
 }
 body {
-  background-color: #96C0B7;
+  /* background-color: #96C0B7; */
+  background-color: #04395E;
 }
+
+/* Autocomplete Search */
 
 li {
   max-width: 400px;
@@ -38,8 +41,9 @@ li div {
   display: none;
   top: 39px;
   z-index: 50;
-  width: 298px;
-
+  width: 300px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
   background-color: #96C0B7;
 }
 
@@ -69,13 +73,39 @@ li div {
   display: block;
 }
 
+/* Artist Panel */
+
+.artist-panel {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  display: none;
+  background-color: #96C0B7;
+  position: fixed;
+  width: 300px;
+  height: 85vh;
+  padding: 25px;
+  height: 85vh;
+  overflow-y: scroll;
+}
+
 header#artist-bio-header {
   z-index: 5;
   position: fixed;
   top: 65px;
-  background-color: #FEF6C9;
+  background-color: rgba(150, 192, 183, 0.842);
   left: 0px;
   width: 310px;
+  
+}
+#artist-bio-header * {
+  font-weight: bold;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.artist-panel a {
+text-decoration: none;
+color: #C60F7B;
 }
 
 #artist-genres {
@@ -85,15 +115,14 @@ header#artist-bio-header {
 ::-webkit-scrollbar { 
   display: none; 
 }
-.artist-panel {
-  display: none;
-  background-color: #FEF6C9;
+
+/* Player Panel */
+
+.player-panel {
   position: fixed;
-  width: 300px;
-  height: 85vh;
-  padding: 25px;
-  height: 85vh;
-  overflow-y: scroll;
+  bottom: 0;
+  right: 0;
+  display: none;
 }
 
 /* Canvas */
