@@ -38,8 +38,7 @@ header {
 
 /*  BODY  */
 body {
-  /* background-color: #96C0B7; */
-  background-color: #04395E;
+  background-color: #04395ebd;
 }
 
 /* Autocomplete Search */
@@ -130,6 +129,7 @@ color: #e2e5e4;
   src: url('../fonts/CircularStd-Black.otf');
 }
 .artist-panel {
+  z-index: 20;
   font-family: 'spotifont';
   color: #96C0B7;
   border-top-right-radius: 4px;
@@ -195,8 +195,12 @@ color: #C60F7B;
 
 /* Canvas */
 #d3-canvas {
+  z-index: -1;
   position: fixed;
-  left: 350px;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
 }
 /* 
 .svg-container {

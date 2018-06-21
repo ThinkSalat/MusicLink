@@ -1,4 +1,24 @@
 
+export const redraw = () => {
+  console.log('redrawing');
+  var chartDiv = document.getElementById("d3-canvas");
+
+  const width = chartDiv.clientWidth;
+  const height = chartDiv.clientHeight;
+  const svg = d3.select('#d3-canvas');
+
+  svg
+  .attr("width", width)
+  .attr("height", height);
+
+};
+
+export const clearNodes = () => {
+  window.nodes = [];
+  d3.select('svg').remove();
+  createD3();
+};
+
 export const createD3 = () => {
   const nodes = window.nodes;
   const links = window.links;
@@ -16,7 +36,7 @@ export const createD3 = () => {
     .append('svg')
     .attr('width', width)
     .attr('height', height)
-    .data(window.nodes)
+    .data(window.nodes);
 
     //  preserve aspect ratio on resize - IMPLEMENT LATER
     // .attr("preserveAspectRatio", "xMinYMin meet")
@@ -31,8 +51,9 @@ export const createD3 = () => {
 
   // s stuff
   function getNodeColor(node) {
-    // return node.level === 1 ? 'red' : 'gray';
-    return '#C60F7B';
+    // color for seconday #face1a
+    
+    return !node.primary ? '#13ebc0' : '#C60F7B';
   }
   console.log(nodes);
   const nodeElements = svg.append('g')
@@ -78,6 +99,7 @@ export const createD3 = () => {
   .attr('y2', link => link.target.y);
 
   simulation.force('link').link(links);
+
 
 
 

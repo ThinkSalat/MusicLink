@@ -1,16 +1,24 @@
 import { search, retrieveArtist, retrieveRelatedArtists, retrieveArtistBio, getArtistBio, getArtistBioByName } from '../../util/util';
 import { createAutocompleteList } from '../../util/search_util';
-
+import { redraw, clearNodes } from './d3';
 
 window.nodes = [];
 window.links = [];
 
 document.addEventListener('DOMContentLoaded', () => {
-
+  // START TESTING
+  window.retrieveArtist = retrieveArtist;
+  window.retrieveRelatedArtists = retrieveRelatedArtists;
+  window.retrieveArtistBio = retrieveArtistBio;
+  
+  window.getArtistBioByName = getArtistBioByName;
+  window.getArtistBio = getArtistBio;
+  // END TESTING
+  
   // get search input element
   const searchBar = document.getElementById('search');
 
-let nodeIds = [];
+  let nodeIds = [];
 
   // perform calls to spotify api when user enters text into search bar
   searchBar.addEventListener( 'input', e => {
@@ -37,16 +45,15 @@ let nodeIds = [];
         //add searchresults under input
         searchResults.appendChild(searchResultsList);
       })
-      .catch( err => console.log('err', err));
-
-  window.retrieveArtist = retrieveArtist;
-  window.retrieveRelatedArtists = retrieveRelatedArtists;
-  window.retrieveArtistBio = retrieveArtistBio;
-  
-  window.getArtistBioByName = getArtistBioByName;
-  window.getArtistBio = getArtistBio;
-  
+      .catch( err => console.log('err', err));  
   });
+
+  $('.clear-button').on('click', clearNodes);
+
+  //Resizing svg logic
+  redraw();
+  // Redraw based on the new size whenever the browser window is resized.
+  window.addEventListener("resize", redraw);
 
 });
 
