@@ -57,11 +57,14 @@ export const createD3 = () => {
   var defs = svg.append('defs');
 
     // the simulation is a collection of forces about our simulation
-  const simulation = d3.forceSimulation()
+    
+  const simulation = d3.forceSimulation(nodes)
     .force('centerX', d3.forceX().strength(0.05))
     .force('centerY', d3.forceY().strength(0.05))
     .force('collide', d3.forceCollide(65))
-    .force('charge', d3.forceManyBody().strength(-105)) 
+    .force("center", d3.forceCenter(0, 0))
+    .force('charge', d3.forceManyBody().strength(-105))
+    .on("tick", ticked);
 
   const circles = svg.selectAll('circle')
     .data(nodes)
@@ -81,24 +84,26 @@ export const createD3 = () => {
 
   function dragstarted(d)
   { 
-  simulation.restart();
-  simulation.alpha(0.7);
-  d.fx = d.x;
-  d.fy = d.y;
+    simulation.restart();
+    simulation.alpha(0.7);
+    d.fx = d.x;
+    d.fy = d.y;
+
   }
 
   function dragged(d)
   {
-  d.fx = d3.event.x;
-  d.fy = d3.event.y;
+    d.fx = d3.event.x;
+    d.fy = d3.event.y;
   }
 
   function dragended(d)
   {
-  d.fx = null;
-  d.fy = null;
-  simulation.alphaTarget(0.1);
+    d.fx = null;
+    d.fy = null;
+    simulation.alphaTarget(0.1);
   }
+
   defs.selectAll('.artist-pattern')
     .data(nodes)
     .enter().append('pattern')
@@ -127,14 +132,12 @@ export const createD3 = () => {
       .style('fill', '#e2e5e4')
       .style("text-anchor", "middle");
 
-  function dist(d)
-  {
-    return d.distance+30;
-  }
-  var linkForce  = d3.forceLink(links).distance(dist).strength(2);
-
-  simulation.nodes(nodes)
-    .on('tick', ticked);
+  var link = svg.append("g")
+    .attr("class", "links")
+    .selectAll("line")
+    .data(links)
+    .enter().append("line")
+    .attr("stroke-width", function(d) { return Math.sqrt(d.value); });
 
   function ticked() {
     circles
@@ -144,6 +147,13 @@ export const createD3 = () => {
     textElements
       .attr('x', node => node.x)
       .attr('y', node => node.y);
+
+      link
+      .attr("x1", function(d) {return window.nodes[d.source].x;  })
+      .attr("y1", function(d) { return window.nodes[d.source].y; })
+      .attr("x2", function(d) { return window.nodes[d.target].x; })
+      .attr("y2", function(d) { return window.nodes[d.target].y; });
+
   }
 
   // select colors
@@ -162,6 +172,7 @@ export const createD3 = () => {
   }
 
 
+  //zoom stuff
 //   svg.select('g').selectAll("circle")
 //   .data(points)
 // .enter().append("circle")
@@ -195,29 +206,6 @@ export const createD3 = () => {
 // }
 
 // LINKS
-simulation.force.nodes(nodes).links(links);
-
-  simulation.force('link', d3.forceLink()
-    .id(link => link.id)
-    .strength(link => link.strength));
-    simulation.force.start();
-
-  // const linkElements = svg.append('g')
-  // .selectAll('line')
-  // .data(links)
-  // .enter().append('line')
-  //   .attr('stroke-width', 1)
-  //   .attr('stroke', '#E5E5E5');
-
-  // linkElements
-  // .attr('x1', link => {
-  //   return link.source.x
-  // })
-  // .attr('y1', link => link.source.y)
-  // .attr('x2', link => link.target.x)
-  // .attr('y2', link => link.target.y);
-
-  // simulation.force('link').link(links);
 
 
 
