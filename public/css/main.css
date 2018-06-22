@@ -170,6 +170,7 @@ li div {
 }
 
 #search-results {
+  user-select: none;
   position: fixed;
   display: none;
   top: 35px;

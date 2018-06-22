@@ -73,8 +73,32 @@ export const createD3 = () => {
     .attr('class', 'node')
     .style('stroke-width', '5px')
     .style('stroke', getNodeColor)
-    .on('click', node => node.onClick());
+    .on('click', node => node.onClick())
+    .call(d3.drag()
+    .on("start",dragstarted)
+    .on("drag",dragged)
+    .on("end",dragended));
 
+  function dragstarted(d)
+  { 
+  simulation.restart();
+  simulation.alpha(0.7);
+  d.fx = d.x;
+  d.fy = d.y;
+  }
+
+  function dragged(d)
+  {
+  d.fx = d3.event.x;
+  d.fy = d3.event.y;
+  }
+
+  function dragended(d)
+  {
+  d.fx = null;
+  d.fy = null;
+  simulation.alphaTarget(0.1);
+  }
   defs.selectAll('.artist-pattern')
     .data(nodes)
     .enter().append('pattern')
@@ -102,19 +126,25 @@ export const createD3 = () => {
       .attr('class', 'node-text')
       .style('fill', '#e2e5e4')
       .style("text-anchor", "middle");
-  
-    simulation.nodes(nodes)
-      .on('tick', ticked);
 
-    function ticked() {
-      circles
-        .attr('cx', node => node.x)
-        .attr('cy', node => node.y);
+  function dist(d)
+  {
+    return d.distance+30;
+  }
+  var linkForce  = d3.forceLink(links).distance(dist).strength(2);
 
-      textElements
-        .attr('x', node => node.x)
-        .attr('y', node => node.y);
-    }
+  simulation.nodes(nodes)
+    .on('tick', ticked);
+
+  function ticked() {
+    circles
+      .attr('cx', node => node.x)
+      .attr('cy', node => node.y);
+
+    textElements
+      .attr('x', node => node.x)
+      .attr('y', node => node.y);
+  }
 
   // select colors
   function getNodeColor(node) {
@@ -165,10 +195,12 @@ export const createD3 = () => {
 // }
 
 // LINKS
+simulation.force.nodes(nodes).links(links);
 
-  // simulation.force('link', d3.forceLink()
-  //   .id(link => link.id)
-  //   .strength(link => link.strength));
+  simulation.force('link', d3.forceLink()
+    .id(link => link.id)
+    .strength(link => link.strength));
+    simulation.force.start();
 
   // const linkElements = svg.append('g')
   // .selectAll('line')
