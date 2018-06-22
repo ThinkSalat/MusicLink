@@ -25,7 +25,7 @@
 
 // clear nodes
 export const clearNodes = () => {
-  window.nodes = [];
+  window.nodes = {};
   window.nodeIds = [];
   window.links = [];
   d3.select('svg').remove();
@@ -33,7 +33,7 @@ export const clearNodes = () => {
 
 // Create new chart
 export const createD3 = () => {
-  const nodes = window.nodes,
+  const nodes = Object.values(window.nodes),
     links = window.links;
 
   let width = window.innerWidth,
@@ -44,7 +44,7 @@ export const createD3 = () => {
     .append('svg')
     .attr('width', width)
     .attr('height', height)
-    .data(window.nodes);
+    .data(nodes);
 
   // set force simulation
   const simulation = d3.forceSimulation()
@@ -55,13 +55,13 @@ export const createD3 = () => {
   function getNodeColor(node) {
     switch (node.priority) {
       case 1:
-      return '#13ebc0';
+      return '#C60F7B';
       case 2:
         return '#face1a';
       case 3:
-        return '#C60F7B';
+        return '#13ebc0';
       default:
-        return '#C60F7B';
+        return '#13ebc0';
     }
   }
 

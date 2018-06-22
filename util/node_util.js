@@ -9,10 +9,14 @@ export const addNewPrimaryNode = artistId => {
   retrieveArtist(artistId)
     .then( ({ data }) => {
       // set node to primary node
-      data.priority = !nodes.length ? 1 : 2;
+      console.log(Object.keys(nodes).length ===0 );
+      let priority = 2;
+      if (Object.keys(window.nodes).length === 0 || window.nodes[data.id].priority == 1) {
+        priority = 1;
+      }
+      data.priority = priority;
       //return either new node or node that already existed
-      const artistNode = createOrFindNode(data);
-      window.nodes.push(artistNode);
+      window.nodes[data.id] = new Node(data);
       addRelatedArtistNodes(data.id);
     });
 };
@@ -23,9 +27,12 @@ const addRelatedArtistNodes = (artistId) => {
   .then( res => {
     res.data.artists.forEach(artist => {
       // check if artist exists in nodes
-      const artistNode = createOrFindNode(artist);
-      artistNode.priority = artistNode.priority || 3;
-      window.nodes.push(artistNode);
+      if (window.nodes[artist.id]) {
+        var priority = window.nodes[artist.id].priority;
+      }
+      artist.priority = priority;
+      window.nodes[artist.id] = new Node(artist);
+      window.nodes[artist.id].priority = priority || 3;
     });
   })
   .then( () => {
@@ -42,7 +49,7 @@ const createOrFindNode = data => {
 };
 
 const reconfigureLinks = () => {
-  window.nodes.forEach( node => {
+  Object.values(window.nodes).forEach( node => {
     node.addLinks();
   });
 };
