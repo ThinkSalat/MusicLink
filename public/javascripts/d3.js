@@ -26,6 +26,7 @@
 // clear nodes
 export const clearNodes = () => {
   window.nodes = [];
+  window.nodeIds = [];
   window.links = [];
   d3.select('svg').remove();
 };
@@ -52,9 +53,16 @@ export const createD3 = () => {
 
   // select colors
   function getNodeColor(node) {
-    // color for seconday #face1a
-    if (node.secondary) return '#face1a';
-    return !node.primary ? '#13ebc0' : '#C60F7B';
+    switch (node.priority) {
+      case 1:
+      return '#13ebc0';
+      case 2:
+        return '#face1a';
+      case 3:
+        return '#C60F7B';
+      default:
+        return '#C60F7B';
+    }
   }
 
   const nodeElements = svg.append('g')

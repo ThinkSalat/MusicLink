@@ -3,70 +3,46 @@ import Node from '../public/javascripts/node';
 import { createD3 } from '../public/javascripts/d3';
 
 export const addNewPrimaryNode = artistId => {
-  if (!uniqueNode(artistId)) {
-    if (nodes.filter( node => {
-      return node.primary || node.secondary;
-    }).length > 0) {
-      return false;
-    }
-  }
-
   //clearing svg canvas
   $("#d3-canvas").html('');
   // adding primary node
   retrieveArtist(artistId)
     .then( ({ data }) => {
       // set node to primary node
-      if (!nodes.length) {
-        data.primary = true;
-        data.secondary = false;
-      } else {
-        data.secondary = true;
-        data.primary = false;
-      }
-      const artistNode = new Node(data);
-      window.nodes.push(data);
+      data.priority = !nodes.length ? 1 : 2;
+      //return either new node or node that already existed
+      const artistNode = createOrFindNode(data);
+      window.nodes.push(artistNode);
+      addRelatedArtistNodes(data.id);
     });
-  addRelatedArtistNodes('node', artistId);
 };
 
-const addRelatedArtistNodes = (primaryNode, artistId) => {
+const addRelatedArtistNodes = (artistId) => {
   //retreiving related artists
   retrieveRelatedArtists(artistId)
   .then( res => {
     res.data.artists.forEach(artist => {
       // check if artist exists in nodes
-      let artistNode;
-      if(uniqueNode(artist.id)) {
-        artistNode = new Node(artist);
-        window.nodes.push(artist);
-        artist.primary = false;
-        artist.secondary = false;
-        artist.tertiary = true;
-      } else {
-        console.log('not unique');
-        //find artist's ndoe and select it and st aristNoe to
-      }
-      addLinksToThisNode(artistNode);
+      const artistNode = createOrFindNode(artist);
+      artistNode.priority = artistNode.priority || 3;
+      window.nodes.push(artistNode);
     });
   })
   .then( () => {
+    reconfigureLinks();
     createD3();
   });
 };
 
-const uniqueNode = artistId => {
-  //Must IMPLEMENT 
+const createOrFindNode = data => {
   window.nodes.forEach( node => {
-    if (node.id === artistId) return false;
+    if (node.id === data.id) return node;
   });
-  return true;
+  return new Node(data);
 };
 
-const addLinksToThisNode = node => {
- //IMPLEMENT CORRECTLY
-};
-
-const getLinksForNode = node => {
-
+const reconfigureLinks = () => {
+  window.nodes.forEach( node => {
+    node.addLinks();
+  });
 };

@@ -3,10 +3,9 @@ import { createAutocompleteList } from '../../util/search_util';
 // import { redraw, clearNodes } from './d3';
 import { clearNodes } from './d3';
 
-window.nodes = [];
-window.links = [];
 
 document.addEventListener('DOMContentLoaded', () => {
+  clearNodes();
   // START TESTING
   window.retrieveArtist = retrieveArtist;
   window.retrieveRelatedArtists = retrieveRelatedArtists;
@@ -19,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // get search input element
   const searchBar = document.getElementById('search');
 
-  let nodeIds = [];
+
 
   // perform calls to spotify api when user enters text into search bar
   searchBar.addEventListener( 'input', e => {
