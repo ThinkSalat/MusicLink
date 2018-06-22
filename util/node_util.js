@@ -17,7 +17,6 @@ export const addNewPrimaryNode = artistId => {
       //return either new node or node that already existed
       window.nodes[data.id] = new Node(data);
       addRelatedArtistNodes(data.id);
-      processedArtists[data.id] = true;
     });
 };
 

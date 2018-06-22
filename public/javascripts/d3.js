@@ -60,15 +60,24 @@ export const createD3 = () => {
     // the simulation is a collection of forces about our simulation
     
   const simulation = d3.forceSimulation(nodes)
-    .force("link", d3.forceLink(links).id(d => d.id).distance(300).strength(1))
-    // .force("link", d3.forceLink().id(d => d.id))
-    // .force("charge", d3.forceManyBody().strength(-500).distanceMin(240))
-    // .force("charge", d3.forceManyBody().strength(-500).distanceMin(240))
+  .force("link", d3.forceLink(links).id(d => d.id).distance(160).strength(0.35))
+    .alphaDecay(0.05)
+    .alpha(0.5)
+    .force("charge", d3.forceManyBody().strength(-500).distanceMin(240))
     .force('centerX', d3.forceX().strength(0.05))
     .force('centerY', d3.forceY().strength(0.05))
     .force('collide', d3.forceCollide(70))
     .force("center", d3.forceCenter(0, 0))
     .on("tick", ticked);
+
+    var link = svg.append("g")
+    .attr("class", "links")
+    .selectAll("line")
+    .data(links)
+    .enter().append("line")
+    .style('stroke', 'grey')
+    .style('fill', 'grey')
+    .attr("stroke-width", d => 2 );
 
   const circles = svg.selectAll('circle')
     .data(nodes)
@@ -85,28 +94,6 @@ export const createD3 = () => {
     .on("start",dragstarted)
     .on("drag",dragged)
     .on("end",dragended));
-
-  function dragstarted(d)
-  { 
-    simulation.restart();
-    simulation.alpha(0.7);
-    d.fx = d.x;
-    d.fy = d.y;
-
-  }
-
-  function dragged(d)
-  {
-    d.fx = d3.event.x;
-    d.fy = d3.event.y;
-  }
-
-  function dragended(d)
-  {
-    d.fx = null;
-    d.fy = null;
-    simulation.alphaTarget(0.1);
-  }
 
   defs.selectAll('.artist-pattern')
     .data(nodes)
@@ -136,15 +123,6 @@ export const createD3 = () => {
       .style('fill', '#e2e5e4')
       .style("text-anchor", "middle");
 
-  var link = svg.append("g")
-    .attr("class", "links")
-    .selectAll("line")
-    .data(links)
-    .enter().append("line")
-    .style('stroke', 'black')
-    .style('fill', 'black')
-    .attr("stroke-width", d => 2 );
-
   function ticked() {
     circles
       .attr('cx', node => node.x)
@@ -160,6 +138,28 @@ export const createD3 = () => {
       .attr("x2", d => d.target.x)
       .attr("y2", d => d.target.y);
 
+  }
+
+  function dragstarted(d)
+  { 
+    simulation.restart();
+    simulation.alpha(0.7);
+    d.fx = d.x;
+    d.fy = d.y;
+
+  }
+
+  function dragged(d)
+  {
+    d.fx = d3.event.x;
+    d.fy = d3.event.y;
+  }
+
+  function dragended(d)
+  {
+    d.fx = null;
+    d.fy = null;
+    simulation.alphaTarget(0.1);
   }
 
   // select colors
