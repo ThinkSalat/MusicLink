@@ -124,7 +124,8 @@ export const createD3 = () => {
       case 2:
         return '#face1a';
       case 3:
-        return '#13ebc0';
+        // return '#13ebc0';
+        return '#rgba(0, 0, 0, 0.0)';
       default:
         return '#13ebc0';
     }
