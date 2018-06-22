@@ -92,7 +92,10 @@ export const createD3 = () => {
   });
 
   simulation.force('link', d3.forceLink()
-    .id(link => link.id)
+    .id(link => {
+      console.log(link);
+      link.id
+    })
     .strength(link => link.strength));
 
   const linkElements = svg.append('g')

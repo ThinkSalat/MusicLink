@@ -10,11 +10,8 @@ export default class Node {
     this.images = images;
     this.name = name;
     this.priority = priority;
-    this.links = [];
-    this.relationships = [];
     this.relatedArtistIds = {};
     this.onClick = this.onClick.bind(this);
-    this.getRelatedArtistsPromise = this.getRelatedArtistsPromise.bind(this);
   }
 
   onClick() {
