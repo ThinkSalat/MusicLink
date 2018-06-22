@@ -1,4 +1,4 @@
-import { search, retrieveArtist, retrieveRelatedArtists, retrieveArtistBio, getArtistBio, getArtistBioByName } from '../../util/util';
+import { search, retrieveArtist, retrieveRelatedArtists, getArtistBio, getArtistBioByName } from '../../util/util';
 import { createAutocompleteList } from '../../util/search_util';
 // import { redraw, clearNodes } from './d3';
 import { clearNodes } from './d3';
@@ -6,14 +6,6 @@ import { clearNodes } from './d3';
 
 document.addEventListener('DOMContentLoaded', () => {
   clearNodes();
-  // START TESTING
-  window.retrieveArtist = retrieveArtist;
-  window.retrieveRelatedArtists = retrieveRelatedArtists;
-  window.retrieveArtistBio = retrieveArtistBio;
-  
-  window.getArtistBioByName = getArtistBioByName;
-  window.getArtistBio = getArtistBio;
-  // END TESTING
   
   // get search input element
   const searchBar = document.getElementById('search');

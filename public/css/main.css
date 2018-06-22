@@ -306,13 +306,21 @@ header#artist-bio-header {
 
 /* nodes / graphs */
 
+.node {
+  z-index: 10;
+}
+
 .node-text {
   user-select: none;
+  
 }
 
 .link {
   stroke: #777;
   stroke-width: 2px;
+  stroke: #999;
+    stroke-opacity: 0.6;
+    z-index: -2;
 }
 
 #d3-canvas {

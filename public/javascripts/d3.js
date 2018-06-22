@@ -1,3 +1,4 @@
+import * as d3 from 'd3';
 
 //change svg size to rsize with window
 // export const redraw = () => {
@@ -59,11 +60,14 @@ export const createD3 = () => {
     // the simulation is a collection of forces about our simulation
     
   const simulation = d3.forceSimulation(nodes)
+    .force("link", d3.forceLink(links).id(d => d.id).distance(300).strength(1))
+    // .force("link", d3.forceLink().id(d => d.id))
+    // .force("charge", d3.forceManyBody().strength(-500).distanceMin(240))
+    // .force("charge", d3.forceManyBody().strength(-500).distanceMin(240))
     .force('centerX', d3.forceX().strength(0.05))
     .force('centerY', d3.forceY().strength(0.05))
-    .force('collide', d3.forceCollide(65))
+    .force('collide', d3.forceCollide(70))
     .force("center", d3.forceCenter(0, 0))
-    .force('charge', d3.forceManyBody().strength(-105))
     .on("tick", ticked);
 
   const circles = svg.selectAll('circle')
@@ -137,7 +141,9 @@ export const createD3 = () => {
     .selectAll("line")
     .data(links)
     .enter().append("line")
-    .attr("stroke-width", function(d) { return Math.sqrt(d.value); });
+    .style('stroke', 'black')
+    .style('fill', 'black')
+    .attr("stroke-width", d => 2 );
 
   function ticked() {
     circles
@@ -149,10 +155,10 @@ export const createD3 = () => {
       .attr('y', node => node.y);
 
       link
-      .attr("x1", function(d) {return window.nodes[d.source].x;  })
-      .attr("y1", function(d) { return window.nodes[d.source].y; })
-      .attr("x2", function(d) { return window.nodes[d.target].x; })
-      .attr("y2", function(d) { return window.nodes[d.target].y; });
+      .attr("x1", d => d.source.x)
+      .attr("y1", d =>  d.source.y)
+      .attr("x2", d => d.target.x)
+      .attr("y2", d => d.target.y);
 
   }
 
