@@ -267,6 +267,10 @@ header#artist-bio-header {
   text-decoration: none;
 }
 
+.padding-notch > div {
+  margin-bottom: 15px;
+}
+
 .artist-panel a {
   font-family: spotifont-bold;
   text-decoration: none;
