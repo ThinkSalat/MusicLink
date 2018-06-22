@@ -31,6 +31,9 @@ export const clearNodes = () => {
   window.processedArtists = {};
   window.links = {};
   d3.select('svg').remove();
+
+  $('.artist-panel').css('display','none');
+  $(".player-panel").css('display','none');
 };
 
 // Create new chart
@@ -51,14 +54,12 @@ export const createD3 = () => {
 
   var defs = svg.append('defs');
 
-  defs.append('pattern')
-    
-
     // the simulation is a collection of forces about our simulation
   const simulation = d3.forceSimulation()
     .force('centerX', d3.forceX().strength(0.05))
     .force('centerY', d3.forceY().strength(0.05))
-    .force('collide', d3.forceCollide(45));
+    .force('collide', d3.forceCollide(65))
+    .force('charge', d3.forceManyBody().strength(-105)) 
 
   const circles = svg.selectAll('circle')
     .data(nodes)
@@ -86,27 +87,34 @@ export const createD3 = () => {
     .attr('xlink:href', node => node.getIcon());
 
 
+    const textElements = svg.append('g')
+      .selectAll('text')
+      .data(nodes)
+      .enter().append('text')
+        .text(node => node.name)
+        .attr('font-size', 15)
+        .attr('dx', 5)
+        .attr('dy', 60)
+        .attr('class', 'node-text')
+        .style('fill', '#e2e5e4')
+        .style("text-anchor", "middle");
+  
+
+  // svg.selectAll('circle').filter( node => node.priority === 1 )
+  // .attr('fill', '#FFD700')
+  // .attr('r', 53);
 
     simulation.nodes(nodes)
       .on('tick', ticked);
 
     function ticked() {
       circles
-        .attr('cx', d => d.x)
-        .attr('cy', d => d.y);
+        .attr('cx', node => node.x)
+        .attr('cy', node => node.y);
+      textElements
+        .attr('x', node => node.x)
+        .attr('y', node => node.y);
     }
-
-  // set svg to be height and width
-  // const svg = d3.select('#d3-canvas')
-  //   .append('svg')
-  //   .attr('width', width)
-  //   .attr('height', height)
-  //   .data(nodes);
-
-  // set force simulation
-  // const simulation = d3.forceSimulation()
-  //   .force('charge', d3.forceManyBody().strength(-15)) 
-  //   .force('center', d3.forceCenter(width / 2, height / 2));
 
   // select colors
   function getNodeColor(node) {
