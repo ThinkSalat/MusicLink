@@ -71,6 +71,8 @@ export const createD3 = () => {
     .attr('cx', 300)
     .attr('fill', node => `url(#${node.id})`)
     .attr('class', 'node')
+    .style('stroke-width', '5px')
+    .style('stroke', getNodeColor)
     .on('click', node => node.onClick());
 
   defs.selectAll('.artist-pattern')
@@ -101,11 +103,6 @@ export const createD3 = () => {
       .style('fill', '#e2e5e4')
       .style("text-anchor", "middle");
   
-
-  // svg.selectAll('circle').filter( node => node.priority === 1 )
-  // .attr('fill', '#FFD700')
-  // .attr('r', 53);
-
     simulation.nodes(nodes)
       .on('tick', ticked);
 
