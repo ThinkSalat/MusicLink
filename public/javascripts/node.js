@@ -23,6 +23,6 @@ export default class Node {
     addNewPrimaryNode(this.id);
   }
   getIcon() {
-   return  this.images.length ? this.images[this.images.length-1].url : 'https://i.imgur.com/PLcxvro.png';
+   return  this.images.length ? this.images[this.images.length-1].url : 'http://groovesharks.org/assets/images/default_avatar.jpg';
   }
 }
