@@ -1,6 +1,5 @@
 import { addNewPrimaryNode } from "../../util/node_util";
 import { getArtistBio } from "../../util/util";
-import { retrieveRelatedArtists } from '../../util/util';
 
 export default class Node {
   constructor({external_urls: { spotify }, genres, id, images, name, priority}) {
