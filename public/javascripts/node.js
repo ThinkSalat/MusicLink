@@ -1,5 +1,6 @@
 import { addNewPrimaryNode } from "../../util/node_util";
 import { getArtistBio } from "../../util/util";
+import { retrieveRelatedArtists } from '../../util/util';
 
 export default class Node {
   constructor({external_urls: { spotify }, genres, id, images, name, priority}) {
@@ -11,8 +12,9 @@ export default class Node {
     this.priority = priority;
     this.links = [];
     this.relationships = [];
+    this.relatedArtistIds = {};
     this.onClick = this.onClick.bind(this);
-    this.addLinks = this.addLinks.bind(this);
+    this.getRelatedArtistsPromise = this.getRelatedArtistsPromise.bind(this);
   }
 
   onClick() {
@@ -20,7 +22,7 @@ export default class Node {
     addNewPrimaryNode(this.id);
   }
 
-  addLinks() {
-    
+  getRelatedArtistsPromise() {
+    return retrieveRelatedArtists(this.id);
   }
 }

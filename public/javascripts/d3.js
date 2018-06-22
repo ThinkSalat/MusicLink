@@ -26,8 +26,9 @@
 // clear nodes
 export const clearNodes = () => {
   window.nodes = {};
-  window.nodeIds = [];
-  window.links = [];
+  window.relatedArtists = {};
+  window.processedArtists = {};
+  window.links = {};
   d3.select('svg').remove();
 };
 

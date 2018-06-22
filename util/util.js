@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { sendTracksToPlayer } from '../public/javascripts/player';
 
 // Express Server is listening on route /authtoken
 // retrieves auth token from spotify then performs api call on passed in url.
