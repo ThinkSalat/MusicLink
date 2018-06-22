@@ -40,7 +40,8 @@ export const clearNodes = () => {
 // Create new chart
 export const createD3 = () => {
   const nodes = Object.values(window.nodes),
-    links = Object.values(window.links);
+    nodeLinks = Object.values(window.links);
+
 
   let width = window.innerWidth,
   height = window.innerHeight;
@@ -60,7 +61,12 @@ export const createD3 = () => {
     // the simulation is a collection of forces about our simulation
     
   const simulation = d3.forceSimulation(nodes)
-  .force("link", d3.forceLink(links).id(d => d.id).distance(160).strength(0.35))
+  .force("link", d3.forceLink(nodeLinks)
+  .id(d => {
+    // debugger
+    return d.id
+  })
+  .distance(160).strength(0.35))
     .alphaDecay(0.05)
     .alpha(0.5)
     .force("charge", d3.forceManyBody().strength(-500).distanceMin(240))
@@ -70,10 +76,12 @@ export const createD3 = () => {
     .force("center", d3.forceCenter(0, 0))
     .on("tick", ticked);
 
+
+
     var link = svg.append("g")
     .attr("class", "links")
     .selectAll("line")
-    .data(links)
+    .data(nodeLinks)
     .enter().append("line")
     .style('stroke', 'grey')
     .style('fill', 'grey')

@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         //add searchresults under input
         searchResults.appendChild(searchResultsList);
       })
-      .catch( err => console.log('err', err));  
+      .catch( err => console.log('errssss', err)); 
   });
 
   $('.clear-button').on('click', clearNodes);

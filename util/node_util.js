@@ -37,7 +37,6 @@ const addRelatedArtistNodes = (artistId) => {
     });
   })
   .then( () => {
-    // reconfigureLinks();
     //add all to related artists object on parent node
     Object.keys(relatedArtistIds).forEach( id => {
       nodes[artistId].relatedArtistIds[id] = true;
@@ -46,9 +45,10 @@ const addRelatedArtistNodes = (artistId) => {
     createD3();
   });
 };
-
+//review
 const createArtistLinks = (artistId) => {
   Object.keys(nodes[artistId].relatedArtistIds).forEach( id => {
+    //duplicating links
       links[`${artistId}-${id}`] = { source: artistId, target: id };
       links[`${id}-${artistId}`] = { source: id, target: artistId };
     });
