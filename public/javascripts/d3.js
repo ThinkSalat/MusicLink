@@ -1,3 +1,4 @@
+
 //change svg size to rsize with window
 // export const redraw = () => {
 //   const svg = d3.select('svg');
@@ -56,7 +57,7 @@ export const createD3 = () => {
   function getNodeColor(node) {
     switch (node.priority) {
       case 1:
-      return '#C60F7B';
+        return '#C60F7B';
       case 2:
         return '#face1a';
       case 3:
@@ -66,12 +67,16 @@ export const createD3 = () => {
     }
   }
 
+  // NODES
   const nodeElements = svg.append('g')
     .selectAll('circle')
     .data(nodes)
     .enter().append('circle')
-      .attr('r', 10)
-      .attr('fill', getNodeColor);
+      .attr('r', 25)
+      .attr('fill', getNodeColor)
+      // .attr('class', 'node')
+      // figure out dis fookin lne
+      .on('click', node => node.onClick());
 
   const textElements = svg.append('g')
     .selectAll('text')
@@ -80,7 +85,16 @@ export const createD3 = () => {
       .text(node => node.name)
       .attr('font-size', 15)
       .attr('dx', 15)
-      .attr('dy', 4);
+      .attr('dy', 4)
+      .attr('class', 'node-text')
+      .style('fill', 'white');
+
+  var images = svg.append("svg:image")
+    .attr("xlink:href",  function(d) { return d.img;})
+    .attr("x", function(d) { return -25;})
+    .attr("y", function(d) { return -25;})
+    .attr("height", 50)
+    .attr("width", 50);
 
   simulation.nodes(nodes).on('tick', () => {
     nodeElements
@@ -91,11 +105,10 @@ export const createD3 = () => {
       .attr('y', node => node.y);
   });
 
+// LINKS
+
   simulation.force('link', d3.forceLink()
-    .id(link => {
-      console.log(link);
-      link.id
-    })
+    .id(link => link.id)
     .strength(link => link.strength));
 
   const linkElements = svg.append('g')
@@ -106,7 +119,10 @@ export const createD3 = () => {
     .attr('stroke', '#E5E5E5');
 
   linkElements
-  .attr('x1', link => link.source.x)
+  .attr('x1', link => {
+    console.log(link);
+    return link.source.x
+  })
   .attr('y1', link => link.source.y)
   .attr('x2', link => link.target.x)
   .attr('y2', link => link.target.y);

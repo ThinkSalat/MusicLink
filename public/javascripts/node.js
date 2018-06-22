@@ -14,7 +14,12 @@ export default class Node {
   }
 
   onClick() {
-    getArtistBio(this.id);
+    getArtistBio({
+      url: this.url,
+      name: this.name,
+      genres: this.genres,
+      id: this.id
+    });
     addNewPrimaryNode(this.id);
   }
 }

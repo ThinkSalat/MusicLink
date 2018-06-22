@@ -50,7 +50,6 @@ const addRelatedArtistNodes = (artistId) => {
 
 const createArtistLinks = (artistId) => {
   Object.keys(nodes[artistId].relatedArtistIds).forEach( id => {
-    console.log(id);
       links[`${artistId}-${id}`] = { source: artistId, target: id };
       links[`${id}-${artistId}`] = { source: id, target: artistId };
     });
