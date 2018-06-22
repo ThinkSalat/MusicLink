@@ -83,7 +83,7 @@ export const createD3 = () => {
     .attr('height', 1)
     .attr('preserveAspectRatio', 'none')
     .attr('xmlns:link', "http://www.w3.org/1999/xlink")
-    .attr('xlink:href', node => node.images[2].url);
+    .attr('xlink:href', node => node.getIcon());
 
 
 

@@ -22,4 +22,7 @@ export default class Node {
     });
     addNewPrimaryNode(this.id);
   }
+  getIcon() {
+    return this.images[this.images.length-1].url;
+  }
 }

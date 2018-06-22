@@ -44,8 +44,14 @@ export const getArtistBio = ({name, id, url, genres}) => {
     if (!bio[0]) bio = $(html).find('.artist-bio');
     //Remove "Read More" button
     bio.find('button').remove();
+
+    //Change bio to "No bio available for name" 
+    if (!$(bio[0]).prop('outerHTML')) {
+      bio = `No bio available for ${name} <br> Try a <a target='_blank' href='http://www.google.com/search?q=${encodeURIComponent(name)}'>Google Search</a>`
+    } else {
     //Changes links from relative links to spotify links that open in new tab
-    bio =  $(bio[0]).prop('outerHTML').replace(/href="/g,'target="_blank" href="https://open.spotify.com');
+      bio =  $(bio[0]).prop('outerHTML').replace(/href="/g,'target="_blank" href="https://open.spotify.com');
+    }
     //create link to artist's spotfiy page
     createArtistBioHeader(url, name);
     //add list of artist's genres
