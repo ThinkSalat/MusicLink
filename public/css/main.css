@@ -39,6 +39,8 @@ header {
 /*  BODY  */
 body {
   background-color: #04395ebd;
+  font-family: 'spotifont';
+
 }
 
 /* Autocomplete Search */
@@ -84,11 +86,12 @@ li div {
   width: 300px;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
-  background-color: #346e6ef9;
-color: #e2e5e4;
-    -webkit-box-shadow: 0px 12px 20px 3px rgba(0,0,0,0.24)!important;
-    -moz-box-shadow: 0px 12px 20px 3px rgba(0,0,0,0.24)!important;
-    box-shadow: 0px 12px 20px 3px rgba(0,0,0,0.24)!important;
+  /* background-color: #346e6ef9; */
+  background-color: #c3caca3d;
+  color: #e2e5e4;
+  -webkit-box-shadow: 0px 12px 20px 3px rgba(0,0,0,0.24)!important;
+  -moz-box-shadow: 0px 12px 20px 3px rgba(0,0,0,0.24)!important;
+  box-shadow: 0px 12px 20px 3px rgba(0,0,0,0.24)!important;
 }
 
 .list-item span {
@@ -99,7 +102,6 @@ color: #e2e5e4;
 .list-item:hover  {
   /* background-color: #FEF6C9; */
   background-color: #96C0B7;
-
 }
 
 .list-image {
@@ -131,7 +133,9 @@ color: #e2e5e4;
 .artist-panel {
   z-index: 20;
   font-family: 'spotifont';
-  color: #96C0B7;
+  /* color: #96C0B7; */
+  color: #e2e5e4;
+
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
   display: none;
@@ -162,6 +166,7 @@ header#artist-bio-header {
   box-shadow: 0px 2px 7px 1px rgba(0,0,0,0.24)!important;
 }
 #artist-bio-header * {
+  color: #C60F7B;
   font-weight: bold;
   font-size: 18px;
   text-decoration: none;
@@ -170,7 +175,8 @@ header#artist-bio-header {
 .artist-panel a {
   font-family: spotifont-bold;
   text-decoration: none;
-  color: #C60F7B;
+  /* color: #C60F7B; */
+  color: rgb(70, 182, 96);
 }
 
 #artist-genres {
@@ -205,11 +211,12 @@ header#artist-bio-header {
 
 /* nodes / graphs */
 
+.node-text {
+  user-select: none;
+}
 
 .node {
-  fill: #ccc;
-  stroke: #fff;
-  stroke-width: 2px;
+
 }
 
 .link {

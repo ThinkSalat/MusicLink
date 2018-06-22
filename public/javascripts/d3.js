@@ -74,8 +74,7 @@ export const createD3 = () => {
     .enter().append('circle')
       .attr('r', 25)
       .attr('fill', getNodeColor)
-      // .attr('class', 'node')
-      // figure out dis fookin lne
+      .attr('class', 'node')
       .on('click', node => node.onClick());
 
   const textElements = svg.append('g')
@@ -84,10 +83,12 @@ export const createD3 = () => {
     .enter().append('text')
       .text(node => node.name)
       .attr('font-size', 15)
-      .attr('dx', 15)
-      .attr('dy', 4)
+      .attr('dx', 5)
+      .attr('dy', 37)
       .attr('class', 'node-text')
-      .style('fill', 'white');
+      .style('fill', '#e2e5e4')
+      .style("text-anchor", "middle");
+
 
   var images = svg.append("svg:image")
     .attr("xlink:href",  function(d) { return d.img;})
