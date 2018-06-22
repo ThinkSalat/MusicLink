@@ -51,6 +51,8 @@ export const createD3 = () => {
     .append('g')
     .attr('transform', `translate(${width/2},${height/2})`);
 
+    // for zoom
+    // var points = d3.range(2000).map(phyllotaxis(10));
 
   var defs = svg.append('defs');
 
@@ -87,17 +89,17 @@ export const createD3 = () => {
     .attr('xlink:href', node => node.getIcon());
 
 
-    const textElements = svg.append('g')
-      .selectAll('text')
-      .data(nodes)
-      .enter().append('text')
-        .text(node => node.name)
-        .attr('font-size', 15)
-        .attr('dx', 5)
-        .attr('dy', 60)
-        .attr('class', 'node-text')
-        .style('fill', '#e2e5e4')
-        .style("text-anchor", "middle");
+  const textElements = svg.append('g')
+    .selectAll('text')
+    .data(nodes)
+    .enter().append('text')
+      .text(node => node.name)
+      .attr('font-size', 15)
+      .attr('dx', 5)
+      .attr('dy', 60)
+      .attr('class', 'node-text')
+      .style('fill', '#e2e5e4')
+      .style("text-anchor", "middle");
   
 
   // svg.selectAll('circle').filter( node => node.priority === 1 )
@@ -111,6 +113,7 @@ export const createD3 = () => {
       circles
         .attr('cx', node => node.x)
         .attr('cy', node => node.y);
+
       textElements
         .attr('x', node => node.x)
         .attr('y', node => node.y);
@@ -130,48 +133,38 @@ export const createD3 = () => {
     }
   }
 
-  // NODES
-  // const nodeElements = svg.append('g')
-  //   .selectAll('circle')
-  //   .data(nodes)
-  //   .enter().append('circle')
-  //     .attr('r', 25)
-  //     .attr('fill', getNodeColor)
-  //     .attr('class', 'node')
-  //     .on('click', node => node.onClick());
 
-  // const textElements = svg.append('g')
-  //   .selectAll('text')
-  //   .data(nodes)
-  //   .enter().append('text')
-  //     .text(node => node.name)
-  //     .attr('font-size', 15)
-  //     .attr('dx', 5)
-  //     .attr('dy', 37)
-  //     .attr('class', 'node-text')
-  //     .style('fill', '#e2e5e4')
-  //     .style("text-anchor", "middle");
-
-  // IMAGES
-
-  // const images = svg.select('circle').enter().append("svg:image")
-  //   .attr("xlink:href", node => node.images[2].url)
-  //   .attr("x", d => d.x)
-  //   .attr("y", d => d.y)
-  //   .attr("height", 50)
-  //   .attr("width", 50);
+//   svg.select('g').selectAll("circle")
+//   .data(points)
+// .enter().append("circle")
+//   .attr("cx", function(d) { return d[0]; })
+//   .attr("cy", function(d) { return d[1]; })
+//   .attr("r", 2.5);
 
 
+//   svg.append("rect")
+//     .attr("width", width)
+//     .attr("height", height)
+//     .style("fill", "none")
+//     .style("pointer-events", "all")
+//     .call(d3.zoom()
+//       .scaleExtent([1 / 2, 4])
+//         .on("zoom", zoomed));
 
-    // FORCE SIM
-  // simulation.nodes(nodes).on('tick', () => {
-  //   nodeElements
-  //     .attr('cx', node => node.x)
-  //     .attr('cy', node => node.y);
-  //   textElements
-  //     .attr('x', node => node.x)
-  //     .attr('y', node => node.y);
-  // });
+// function zoomed() {
+//   svg.select('g').attr("transform", d3.event.transform);
+// }
+
+// function phyllotaxis(radius) {
+//   var theta = Math.PI * (3 - Math.sqrt(5));
+//   return function(i) {
+//     var r = radius * Math.sqrt(i), a = theta * i;
+//     return [
+//       width / 2 + r * Math.cos(a),
+//       height / 2 + r * Math.sin(a)
+//     ];
+//   };
+// }
 
 // LINKS
 
