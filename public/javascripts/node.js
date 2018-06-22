@@ -21,8 +21,4 @@ export default class Node {
     getArtistBio(this.id);
     addNewPrimaryNode(this.id);
   }
-
-  getRelatedArtistsPromise() {
-    return retrieveRelatedArtists(this.id);
-  }
 }
