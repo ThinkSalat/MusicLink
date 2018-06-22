@@ -9,13 +9,15 @@
     "lib": "lib"
   },
   "engines": {
-    "node": ">=8.1.0"
+    "node": ">=8.1.0",
+    "npm": "6.1.0"
   },
   "scripts": {
     "build": "webpack --watch",
     "start": "node app.js",
     "dev": "nodemon index.js & webpack --watch",
-    "start:debug": "DEBUG=* node app.js"
+    "start:debug": "DEBUG=* node app.js",
+    "postinstall": "webpack"
   },
   "dependencies": {
     "axios": "^0.18.0",
