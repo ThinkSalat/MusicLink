@@ -49,6 +49,18 @@ i.fas.fa-trash {
   visibility: hidden;
   position: absolute;
 }
+.github-tooltip {
+  visibility: hidden;
+  position: absolute;
+}
+[class*='-tooltip'] {
+  visibility: hidden;
+  position: absolute;
+}
+.clear-node-tooltip {
+  visibility: hidden;
+  position: absolute;
+}
 button:hover .clear-node-tooltip {
   visibility: visible;
   color: white;
@@ -75,6 +87,41 @@ button:hover .clear-node-tooltip {
 .personal-icons a {
   margin-left: 5px;
   color: white;
+}
+i:hover .github-tooltip {
+visibility: visible;
+  color: white;
+  padding: 4px;
+  width: 40px;
+  border-radius: 4px;
+  font-size: 12px;
+  background-color: black;
+  left: -3px;
+    top: 39px;
+}
+
+.linkedin:hover .linkedin-tooltip {
+visibility: visible;
+  color: white;
+  padding: 4px;
+  width: 40px;
+  border-radius: 4px;
+  font-size: 12px;
+  background-color: black;
+  left: -3px;
+    top: 39px;
+}
+
+.portfolio:hover .portfolio-tooltip {
+visibility: visible;
+  color: white;
+  padding: 4px;
+  width: 40px;
+  border-radius: 4px;
+  font-size: 12px;
+  background-color: black;
+  left: -3px;
+    top: 39px;
 }
 
 /*  BODY  */

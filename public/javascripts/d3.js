@@ -36,7 +36,7 @@ export const clearNodes = () => {
 // Create new chart
 export const createD3 = () => {
   const nodes = Object.values(window.nodes),
-    links = window.links;
+    links = Object.values(window.links);
 
   let width = window.innerWidth,
   height = window.innerHeight;
@@ -89,14 +89,18 @@ export const createD3 = () => {
       .style('fill', '#e2e5e4')
       .style("text-anchor", "middle");
 
+  // IMAGES
 
-  var images = svg.append("svg:image")
-    .attr("xlink:href",  function(d) { return d.img;})
-    .attr("x", function(d) { return -25;})
-    .attr("y", function(d) { return -25;})
+  var images = svg.select('circle').enter().append("svg:image")
+    .attr("xlink:href", node => node.images[2].url)
+    .attr("x", d => d.x)
+    .attr("y", d => d.y)
     .attr("height", 50)
     .attr("width", 50);
 
+
+
+    // FORCE SIM
   simulation.nodes(nodes).on('tick', () => {
     nodeElements
       .attr('cx', node => node.x)
@@ -121,7 +125,6 @@ export const createD3 = () => {
 
   linkElements
   .attr('x1', link => {
-    console.log(link);
     return link.source.x
   })
   .attr('y1', link => link.source.y)
