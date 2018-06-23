@@ -1,7 +1,7 @@
 # MusicLink
 A D3 data visualization project in JavaScript
 
-[Live Site](musiclink.trendr.com)
+[Live Site](https://musiclink.thinksalat.com)
 
 MusicLink's main functionality is created in JavaScript, d3.JS. I used jQuery and Axios for parsing and AJAX calls respectively
 The data mostly comes from Spotify's API, which is handled in real-time by a Node.JS server running on the Express framework. 
