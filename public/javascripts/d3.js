@@ -62,10 +62,7 @@ export const createD3 = () => {
     
   const simulation = d3.forceSimulation(nodes)
   .force("link", d3.forceLink(nodeLinks)
-  .id(d => {
-    // debugger
-    return d.id
-  })
+  .id(d => d.id)
   .distance(160).strength(0.35))
     .alphaDecay(0.05)
     .alpha(0.5)
