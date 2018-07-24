@@ -136,6 +136,16 @@ body {
 
 }
 
+.hidden {
+  visibility: hidden;
+}
+
+.help-overlay {
+  display: block;
+  background-color: #C60F7B;
+  font-size: 666px;
+}
+
 /* Autocomplete Search */
 
 li {
