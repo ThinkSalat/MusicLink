@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
   $('.clear-button').on('click', clearNodes);
   $('.help-button').on('click', displayHelp);
   $(".modal-glass").on('click', displayHelp);
+  $(".help-close").on('click', displayHelp);
   $(".help-overlay").click(false);
   //Resizing svg logic
   // redraw();
