@@ -133,17 +133,31 @@ visibility: visible;
 body {
   background-color: #04395ebd;
   font-family: 'spotifont';
-
 }
 
+/* help overlay */
 .hidden {
   visibility: hidden;
 }
 
+.modal-glass {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
 .help-overlay {
   display: block;
-  background-color: #C60F7B;
-  font-size: 666px;
+  position: relative;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 4px;
+  top: 90px;
+  width: 500px;
+  background-color: grey;
+  font-size: 20px;
 }
 
 /* Autocomplete Search */

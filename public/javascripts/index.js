@@ -6,6 +6,7 @@ import { clearNodes, createD3 } from './d3';
 const displayHelp = () => {
   console.log('toggling', $('.help-overlay').hasClass("hidden"));
   $(".help-overlay").toggleClass("hidden");
+  $(".modal-glass").toggleClass("hidden");
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -44,7 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   $('.clear-button').on('click', clearNodes);
   $('.help-button').on('click', displayHelp);
-
+  $(".modal-glass").on('click', displayHelp);
+  $(".help-overlay").click(false);
   //Resizing svg logic
   // redraw();
   // // Redraw based on the new size whenever the browser window is resized.
