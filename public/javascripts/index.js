@@ -3,6 +3,10 @@ import { createAutocompleteList } from '../../util/search_util';
 // import { redraw, clearNodes } from './d3';
 import { clearNodes, createD3 } from './d3';
 
+const displayHelp = () => {
+  console.log('hey');
+  $(".help-overlay").toggleClass("hidden");
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   clearNodes();
