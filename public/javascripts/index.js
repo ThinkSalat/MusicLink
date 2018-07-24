@@ -6,7 +6,7 @@ import { clearNodes, createD3 } from './d3';
 
 document.addEventListener('DOMContentLoaded', () => {
   clearNodes();
-  
+  displayHelp();
   // get search input element
   const searchBar = document.getElementById('search');
 
@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   $('.clear-button').on('click', clearNodes);
+  $('.help-button').on('click', displayHelp);
 
   //Resizing svg logic
   // redraw();

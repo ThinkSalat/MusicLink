@@ -37,12 +37,17 @@ button:focus {
 button:hover {
   cursor: pointer;
 }
+
+.fa-question-circle {
+  font-size: 22px;
+}
+
 i.fas.fa-trash {
   display: flex;
   align-items: center;
   justify-content: center;
   color: #383b42;
-  font-size: 25px;
+  font-size: 22px;
 }
 
 .clear-node-tooltip {
