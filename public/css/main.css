@@ -166,8 +166,11 @@ body {
   border-radius: 4px;
   top: 90px;
   width: 500px;
-  background-color: grey;
+  background-color: #d6d6d6;
   font-size: 20px;
+  -webkit-box-shadow: 1px 5px 15px 1px rgba(0,0,0,0.24)!important;
+  -moz-box-shadow: 1px 5px 15px 1px rgba(0,0,0,0.24)!important;
+  box-shadow: 1px 5px 15px 1px rgba(0,0,0,0.24)!important;
 }
 
 .help-list {
