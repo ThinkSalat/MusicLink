@@ -1,6 +1,5 @@
 import { addNewPrimaryNode } from "../../util/node_util";
 import { getArtistBio } from "../../util/util";
-import { createD3, clearNodes } from './d3';
 
 export default class Node {
   constructor({external_urls: { spotify }, genres, id, images, name, priority}) {
