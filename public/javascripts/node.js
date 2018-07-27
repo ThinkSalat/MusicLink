@@ -24,10 +24,22 @@ export default class Node {
       id: this.id
     });
     window.selectedNode = this;
-    console.log('hey 26 node.js');
-    createD3();
+    this.colorNodes()
+
+    //Re comment this when adding multiple primary artists to page
     // addNewPrimaryNode(this.id);
   }
+
+  colorNodes() {
+    //remove selection from other nodes
+    const nodes = Object.values(window.nodes).filter(node => node.priority > 2)
+    nodes.forEach( node => $(`.node-${node.id}`).removeClass('selected'))
+
+    // add selection to current node
+    const node = $(`.node-${this.id}`);
+    node.addClass('selected');
+  }
+
   getIcon() {
    return  this.images.length ? this.images[this.images.length-1].url : 'http://groovesharks.org/assets/images/default_avatar.jpg';
   }

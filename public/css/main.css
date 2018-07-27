@@ -370,6 +370,11 @@ header#artist-bio-header {
   
 }
 
+.selected {
+  stroke: cyan;
+  stroke-width: 5px;
+}
+
 .link {
   stroke: #777;
   stroke-width: 2px;

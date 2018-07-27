@@ -90,8 +90,9 @@ export const createD3 = () => {
     .attr('r', 40)
     .attr('cy', 100)
     .attr('cx', 300)
+    .attr('id', node => `circle-${node.id}`)
     .attr('fill', node => `url(#${node.id})`)
-    .attr('class', 'node')
+    .attr('class', node => `node-${node.id}`)
     .style('stroke-width', '5px')
     .style('stroke', getNodeColor)
     .on('click', node => node.onClick())
@@ -169,9 +170,6 @@ export const createD3 = () => {
 
   // select colors
   function getNodeColor(node) {
-    if (window.selectedNode && window.selectedNode.id === node.id) {
-      return '#13ebc0';
-    }
     switch (node.priority) {
       case 1:
         return '#C60F7B';
