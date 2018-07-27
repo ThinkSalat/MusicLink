@@ -169,6 +169,9 @@ export const createD3 = () => {
 
   // select colors
   function getNodeColor(node) {
+    if (window.selectedNode && window.selectedNode.id === node.id) {
+      return '#13ebc0';
+    }
     switch (node.priority) {
       case 1:
         return '#C60F7B';

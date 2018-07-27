@@ -4,7 +4,6 @@ import { createAutocompleteList } from '../../util/search_util';
 import { clearNodes, createD3 } from './d3';
 
 const displayHelp = () => {
-  console.log('toggling', $('.help-overlay').hasClass("hidden"));
   $(".help-overlay").toggleClass("hidden");
   $(".modal-glass").toggleClass("hidden");
 }
