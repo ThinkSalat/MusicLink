@@ -1,10 +1,11 @@
 import { retrieveArtist, retrieveRelatedArtists } from './util';
 import Node from '../public/javascripts/node';
-import { createD3 } from '../public/javascripts/d3';
+import { createD3, clearNodes } from '../public/javascripts/d3';
 
 export const addNewPrimaryNode = artistId => {
   //clearing svg canvas
   $("#d3-canvas").html('');
+  clearNodes();
   // adding primary node
   retrieveArtist(artistId)
     .then( ({ data }) => {
