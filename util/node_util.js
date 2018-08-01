@@ -5,7 +5,7 @@ import { createD3, clearNodes } from '../public/javascripts/d3';
 export const addNewPrimaryNode = artistId => {
   //clearing svg canvas
   $("#d3-canvas").html('');
-  // clearNodes();
+  clearNodes();
   // adding primary node
   retrieveArtist(artistId)
     .then( ({ data }) => {

@@ -33,12 +33,14 @@ export const clearNodes = () => {
   window.links = {};
   d3.select('svg').remove();
 
-  $('.artist-panel').css('display','none');
+  $('.artist-panel').css('visibility','hidden');
   $(".player-panel").css('display','none');
 };
 
 // Create new chart
 export const createD3 = () => {
+  $('.artist-panel').css('visibility','visible');
+
   const nodes = Object.values(window.nodes),
     nodeLinks = Object.values(window.links);
 
