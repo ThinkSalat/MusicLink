@@ -93,40 +93,10 @@ button:hover .clear-node-tooltip {
   margin-left: 5px;
   color: white;
 }
-i:hover .github-tooltip {
-visibility: visible;
-  color: white;
-  padding: 4px;
-  width: 40px;
-  border-radius: 4px;
-  font-size: 12px;
-  background-color: black;
-  left: -3px;
-    top: 39px;
-}
 
-.linkedin:hover .linkedin-tooltip {
-visibility: visible;
-  color: white;
-  padding: 4px;
-  width: 40px;
-  border-radius: 4px;
-  font-size: 12px;
-  background-color: black;
-  left: -3px;
-    top: 39px;
-}
-
-.portfolio:hover .portfolio-tooltip {
-visibility: visible;
-  color: white;
-  padding: 4px;
-  width: 40px;
-  border-radius: 4px;
-  font-size: 12px;
-  background-color: black;
-  left: -3px;
-    top: 39px;
+.portfolio {
+ width: 35px;
+ height: 40px;
 }
 
 /*  BODY  */
